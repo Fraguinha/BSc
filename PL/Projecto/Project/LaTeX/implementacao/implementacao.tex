@@ -1,0 +1,129 @@
+\section{Implementação e Testes}
+\label{sec2:implementation}
+
+\subsection{Introdução}
+\label{sec2:subsec:intro}
+
+Neste capítulo serão apresentadas detalhadamente as opções de implementação deste projeto, de forma a facilitar a sua interpretação, bem como alguns screenshots de algumas das principais funcionalidades implementadas.
+
+\subsection{Gramática}
+\label{sec2:subsec:choices}
+
+Nesta secção serão apresentadas decisões tomadas para a linguagem.
+
+\subsubsection{Comentários}
+
+A linguagem Natrix permite o uso de comentários, tanto \textit{single line}, como \textit{multi line} através do uso dos símbolos "//", "(*" e "*)", respectivamente. Isto é representado pela expressão regular seguinte:
+
+\lstinputlisting[firstline=7, lastline=7, caption={Comentarios}]{../../Grammar/natrix.ebnf}
+
+Os comentários por bloco também ser aninhados o que não é possivel ser representado recorrendo apenas a esta expressão regular
+
+\subsubsection{Variaveis}
+\label{sec2:subsubsec:variaveis}
+
+A nomenclatura de uma variavel é representada nas seguintes regras gramaticais:
+
+\lstinputlisting[firstline=18, lastline=18, caption={identifier}]{../../Grammar/natrix.ebnf}
+
+A declaração de variaveis é efectuada da seguinte forma:
+
+\lstinputlisting[firstline=76, lastline=82, caption={declaração}]{../../Grammar/natrix.ebnf}
+
+O valor de uma variavel pode ser alterado fazendo uso da regra de atribuição:
+
+\lstinputlisting[firstline=84, lastline=87, caption={atribuição}]{../../Grammar/natrix.ebnf}
+
+O acesso a uma variavel é feito recorrendo ao seu identificador ou, no caso dos arrays, um elemento pode ser acedido através do identificador e o indice correspondente
+
+\lstinputlisting[firstline=20, lastline=20, caption={variavel}]{../../Grammar/natrix.ebnf}
+
+
+\subsubsection{Tipos}
+
+Na linguagem Natrix foram definidos varios tipos primitivos (null, int, bool, string) e foi permitida a definição de novos tipos através de combinações de tipos primitivos
+
+\lstinputlisting[firstline=30, lastline=30, caption={tipos}]{../../Grammar/natrix.ebnf}
+
+\subsubsection{Expressões}
+
+Uma expressão é qualquer frase que represente um valor.
+
+\lstinputlisting[firstline=58, lastline=74, caption={expressão}]{../../Grammar/natrix.ebnf}
+\clearpage
+
+\subsubsection{\textit{Statement}}
+
+Um \textit{statement} é uma frase que representa uma instrução a executar.
+
+Para além dos \textit{statements} já mencionados em variaveis~(\ref{sec2:subsubsec:variaveis} declarações e atribuições), estão também incluidos nos \textit{statements} a declaração de funções e instruções de controlo de fluxo (foreach, if then else)
+
+\lstinputlisting[firstline=89, lastline=106, caption={statement}]{../../Grammar/natrix.ebnf}
+
+\subsubsection{Programa}
+
+Um programa na linguagem Natrix é representado por um conjunto de \textit{statements}
+
+\lstinputlisting[firstline=108, lastline=108, caption={programa}]{../../Grammar/natrix.ebnf}
+\clearpage
+
+\subsection{Código}
+\label{sec2:subsec:code}
+
+\input{implementacao/lexer}
+\clearpage
+
+\input{implementacao/parser}
+\clearpage
+
+\input{implementacao/ast}
+\clearpage
+
+\input{implementacao/main}
+\clearpage
+
+\input{implementacao/interpretador}
+
+\input{implementacao/compilador}
+\clearpage
+
+\subsection{Testes}
+\label{sec2:subsec:testes}
+
+Durante a implementação do intrepretador e compilador, foram criados vários testes (tanto positivos como negativos) de forma a ser possivel verificar que estes se estavam a comportar da forma esperada.
+
+Os testes encontram se todos na pasta \textit{tests} numa de duas subdirectories:
+
+\begin{enumerate}
+  \item \textbf{good} (testes positivos)
+  \item \textbf{bad} (testes negativos)
+\end{enumerate}
+
+De forma a tornar mais simples a verificação dos testes foi utilizado o script: \textit{run-tests}
+
+\subsection{Manual de Utilização}
+\label{sec2:subsec:manual}
+
+O Interpretador e Compilador foi desenvolvido de forma a correr em qualquer plataforma onde seja possível correr \textit{OCaml}. O compilador gera codigo assembly para processadores \textit{X86\_64} e é executável no Sistema Operativo \textit{Linux}.
+
+\subsubsection{Dependências}
+\label{sec2:subsubsec:dependencias}
+
+De forma a ser possivel compilar o projecto é necessário ter o programa \textit{Menhir} instalado, para tal, deverá ser executado o commando: \textit{\$ opam install menhir}
+
+\subsubsection{Compilação}
+\label{sec2:subsubsec:compilacao}
+
+Para proceder a compilação do natrix deverá ser executado na linha de comandos: \textit{\$ make}
+
+\subsubsection{Modos de utilização}
+\label{sec2:subsubsec:utilizacao}
+
+O programa Natrix possui dois modos de utilização:
+
+\begin{enumerate}
+  \item \textbf{interpretador} (\textit{\$ natrix --interpret filename.nx})
+  \item \textbf{Compilador} (\textit{\$ natrix [-o file] filename.nx})
+\end{enumerate}
+
+O utilizador poderá também passar o comando: \textit{\$ ./natrix} para obter o menu de ajuda e visualizar todos os comandos descritos

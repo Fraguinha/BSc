@@ -1,0 +1,20 @@
+Exercicio 6
+
+a)
+
+D 0000
+I 0001
+M 0010
+R 0011
+T 0100
+V 0101
+
+. 0110 -> 011
+A 100
+E 101
+S 110
+U 111
+
+EU.DEVIA.ESTUDAR.MAIS
+
+b)

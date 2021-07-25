@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsf/core"
+      xmlns:s="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+  <ui:composition template="/default.xhtml">
+
+    <ui:define name="title">Shopping Cart</ui:define>
+
+    <ui:define name="content">
+
+      <div class="container mt-5">
+        <div class="card">
+          <div class="card-header text-center">
+            Shopping Cart
+          </div>
+          <div class="card-body">
+            <h:form>
+              <!-- Table -->
+              <h:dataTable class="w-100 h-100 table table-hover text-center" value="#{bookController.shoppingCart}" var="item">
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Name"/>
+                  </c:facet>
+                  <h:outputText value="#{item.name}"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Author"/>
+                  </c:facet>
+                  <h:outputText value="#{item.author}"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Publisher"/>
+                  </c:facet>
+                  <h:outputText value="#{item.publisher}"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Language"/>
+                  </c:facet>
+                  <h:outputText value="#{item.language}"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Genre"/>
+                  </c:facet>
+                  <h:outputText value="#{item.genre}"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Year"/>
+                  </c:facet>
+                  <h:outputText value="#{item.yearPublication}"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Quantity"/>
+                  </c:facet>
+                  <h:outputText value="#{item.quantity}"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Price"/>
+                  </c:facet>
+                  <h:outputText value="#{item.price} €"/>
+                </h:column>
+                <h:column>
+                  <c:facet name="header">
+                    <h:outputText value="Remove"/>
+                  </c:facet>
+                  <span class="align-middle material-icons">
+                    <h:commandButton class="btn btn-primary" value="X" action="${bookController.removeFromCart(item.id)}"/>
+                  </span>
+                </h:column>
+              </h:dataTable>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <h:commandButton class="btn btn-success" value="Buy" action="#{bookController.buy(userController.user.getid())}"/>
+                <h:commandButton class="btn btn-danger" value="Clear" action="#{bookController.clear()}"/>
+              </div>
+            </h:form>
+          </div>
+        </div>
+      </div>
+
+    </ui:define>
+
+  </ui:composition>
+</html>

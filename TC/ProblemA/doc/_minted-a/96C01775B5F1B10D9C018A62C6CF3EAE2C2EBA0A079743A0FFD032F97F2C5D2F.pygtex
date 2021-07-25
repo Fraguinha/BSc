@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* This function follows the letters *)}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{consumeL} \PYG{n}{l} \PYG{n}{state} \PYG{n}{newState} \PYG{n}{transitions} \PYG{o}{=}
+    \PYG{k}{match} \PYG{n}{state} \PYG{k}{with}
+    \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{newState}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n}{s}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)::}\PYG{n}{stl} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+      \PYG{k}{let} \PYG{k}{rec} \PYG{n}{followLTransitions} \PYG{n}{newState} \PYG{n}{transitions} \PYG{o}{=}
+        \PYG{k}{match} \PYG{n}{transitions} \PYG{k}{with}
+        \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{newState}
+        \PYG{o}{|} \PYG{o}{(}\PYG{n}{i}\PYG{o}{,} \PYG{n}{c}\PYG{o}{,} \PYG{n}{op}\PYG{o}{,} \PYG{n}{a}\PYG{o}{,} \PYG{n}{b}\PYG{o}{,} \PYG{n}{j}\PYG{o}{)::}\PYG{n}{ttl} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+          \PYG{k}{let} \PYG{n}{newState} \PYG{o}{=}
+            \PYG{k}{if} \PYG{n}{c} \PYG{o}{=} \PYG{n}{l} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{s} \PYG{o}{=} \PYG{n}{i} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{operation} \PYG{n}{x} \PYG{n}{op} \PYG{n}{a} \PYG{k}{then}
+              \PYG{k}{if} \PYG{n}{b} \PYG{o}{=} \PYG{o}{(\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{k}{then}
+                \PYG{n}{newState}\PYG{o}{@[(}\PYG{n}{j}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)]}
+              \PYG{k}{else}
+                \PYG{n}{newState}\PYG{o}{@[(}\PYG{n}{j}\PYG{o}{,} \PYG{n}{b}\PYG{o}{)]}
+            \PYG{k}{else} \PYG{n}{newState}
+          \PYG{k}{in}
+          \PYG{n}{followLTransitions} \PYG{n}{newState} \PYG{n}{ttl}
+      \PYG{k}{in}
+      \PYG{k}{let} \PYG{n}{newState} \PYG{o}{=} \PYG{n}{followLTransitions} \PYG{n}{newState} \PYG{n}{transitions} \PYG{k}{in}
+      \PYG{n}{consumeL} \PYG{n}{l} \PYG{n}{stl} \PYG{n}{newState} \PYG{n}{transitions}
+\end{Verbatim}

@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* Get answer *)}
+  \PYG{k}{let} \PYG{n+nb+bp}{()} \PYG{o}{=}
+    \PYG{k}{if} \PYG{n}{solution} \PYG{n}{w} \PYG{n}{is} \PYG{n}{fs} \PYG{n}{t} \PYG{k}{then}
+      \PYG{n+nn}{Printf}\PYG{p}{.}\PYG{n}{printf} \PYG{l+s+s2}{\PYGZdq{}YES}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{k}{else}
+      \PYG{n+nn}{Printf}\PYG{p}{.}\PYG{n}{printf} \PYG{l+s+s2}{\PYGZdq{}NO}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}
+\end{Verbatim}

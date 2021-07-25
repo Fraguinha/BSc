@@ -1,0 +1,6 @@
+let x : int = 2 in
+{
+  print(x);
+  x := 6;
+  print(x);
+}

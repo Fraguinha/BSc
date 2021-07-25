@@ -1,0 +1,108 @@
+(* EBNF Grammar *)
+
+(* Lexer *)
+
+space = [' ' '\t' '\n']+ ;
+
+comment = "//" _* '\n' | "(*" _* "*)" ;
+
+character = ['a'-'z' 'A'-'Z' '_'] ;
+number = ['0'-'9']+ ;
+
+range = number ".." number ;
+limit = "minint" | "maxint" ;
+boolean = "true" | "false" ;
+string = '"' _* '"' ;
+integer = "-"? number ;
+
+identifier = character { character | number } ;
+
+variable = identifier | identifier "[" number "]" ;
+
+constant = boolean | limit | integer | range | string ;
+
+size = range | number | identifier ;
+
+array = "array" size "of" type ";" ;
+
+primitives = "int" | "null" | "bool" | "string" ;
+
+type = primitives | identifier | range | array | "(" type "*" type ")" | "(" type "->" type ")" | "RANGE"  "(" expression ")";
+
+
+nop = "!" | "-" ;
+
+bitwise =
+| "&"
+| "|"
+| "^"
+;
+
+math =
+| "+"
+| "-"
+| "*"
+| "/"
+| "%"
+;
+
+comparison =
+| "<"
+| ">"
+| "<="
+| ">="
+| "=="
+| "!="
+;
+
+op = bitwise | math | comparison ;
+
+operation =
+| nop expression
+| expression op expression
+;
+
+expression =
+  "(" expression ")"
+| constant
+| variable
+| operation
+| expression "," expression
+| identifier "(" {expression} ")" ";"
+| "SIZE" "(" range ")" ";"
+| "SIZE" "(" expression ")" ";"
+;
+
+declaration =
+  "let" identifier ":" type "=" expression "in" {statement} ";"
+| "let" identifier ":" array "filled by" expression "in" statement ";"
+| "var" identifier ":" type "=" expression ";"
+| "var" identifier ":" array "filled by" expression ";"
+| "type" identifier "=" expression ";"
+;
+
+attribution =
+  variable ":=" expression ";"
+| variable "[" expression "]" ":=" expression ";"
+;
+
+conditional =
+  "if" expression "then" "{" {statement} "}" "else" "{" {statement} "}" ";"
+| "foreach" identifier "in" type "do" "{" statement "}" ";"
+;
+
+function =
+  "function" identifier {identifier ":" type} "=" "{" {statement} "}" ";"
+| "return" expression ";"
+| "print" "(" expression ")" ";"
+;
+
+statement =
+  comment
+| declaration
+| attribution
+| conditional
+| function
+;
+
+program = {statement} ;

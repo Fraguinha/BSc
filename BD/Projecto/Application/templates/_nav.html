@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{ url_for('index') }}">C4G</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Database
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ url_for('entity') }}">Entities</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ url_for('institution') }}">Institutions</a>
+          <a class="dropdown-item" href="{{ url_for('laboratory') }}">Laboratories</a>
+          <a class="dropdown-item" href="{{ url_for('workgroup') }}">Workgroups</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ url_for('member') }}">Members</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ url_for('resource') }}">Resources</a>
+          <a class="dropdown-item" href="{{ url_for('service') }}">Services</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ url_for('resource_requisition') }}">Requested Resources</a>
+          <a class="dropdown-item" href="{{ url_for('service_requisition') }}">Requested Services</a>
+          {% if session.get('admin') %}
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ url_for('admin') }}">Admins</a>
+          <a class="dropdown-item" href="{{ url_for('user') }}">Users</a>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+      </li>
+      {% if session.get('username') %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

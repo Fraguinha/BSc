@@ -1,0 +1,11 @@
+var a : array 5 of int filled by 0;
+
+var b : array 5..10 of int filled by 0;
+
+var s : int = 10;
+
+var c : array s of int filled by 0;
+
+type r = 5..10;
+
+var d : array r of int filled by 0;

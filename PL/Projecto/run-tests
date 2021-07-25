@@ -1,0 +1,45 @@
+#!/bin/bash
+
+score=0
+max=0
+
+echo "Positive tests"
+
+for f in tests/good/*.nx; do
+    max=`expr $max + 1`;
+    echo $f
+    expected=tests/good/`basename $f .nx`.out
+    rm -f out
+    if ./natrix --interpret $f > out; then
+	if cmp --quiet out $expected; then
+	    score=`expr $score + 1`;
+	else
+	    echo "  FAIL : wrong output for $f"
+	fi
+    else
+	echo "  FAIL interpreting $f"
+    fi
+done
+echo
+
+echo "Negative tests"
+
+for f in tests/bad/*.nx; do
+    max=`expr $max + 1`;
+    echo $f
+    rm -f out
+    if ./natrix --interpret $f > out 2>&1; then
+	echo "  FAIL : evalutation of $f should fail"
+    else
+        if grep -q "error" out; then
+	          score=`expr $score + 1`;
+        else
+            echo "  FAIL : should show 'error'"
+        fi
+    fi
+done
+
+echo
+percent=`expr 100 \* $score / $max`;
+echo "Score: $score / $max tests ($percent%)"
+rm out

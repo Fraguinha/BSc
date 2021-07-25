@@ -1,0 +1,55 @@
+\subsubsection{Parser.mly}
+\label{sec2:subsubsec:parser}
+
+O \textit{parser} é gerado através do uso da ferramenta menhir~\cite{menhir}, neste estão definidos os \textit{tokens} a ser utilizados, nomeadamente:
+
+\lstinputlisting[firstline=7, lastline=19, caption={Tokens}]{../../parser.mly}
+
+A prioridades e associatividade foram definidas como:
+
+\lstinputlisting[firstline=21, lastline=35, caption={Prioridades e Associatividade}]{../../parser.mly}
+\clearpage
+
+As seguintes definições de regras são baseadas na gramática definida previamente~(\ref{sec2:subsec:choices}). Um programa é uma lista de \textit{statements} (ponto de entrada).
+
+\lstinputlisting[firstline=37, lastline=47, caption={Regra program}]{../../parser.mly}
+
+Os \textit{statements} foram separados nas regras \textit{statement} e \textit{simple\_statement}. No \textit{statement} são definidas as regras de construção de uma instrução \textit{if ... then ... else ...}, um ciclo \textit{foreach ... in ... do ...} e declaração de funções. Um \textit{statement} é também um \textit{simple\_statement} seguido de um ";".
+
+\lstinputlisting[firstline=49, lastline=55, caption={Regra statement}]{../../parser.mly}
+
+Na declaração de uma função, deve ser indicado o tipo de retorno bem como uma lista com todos os parametros e os tipos respectivos separados por ";". Ex:
+
+\begin{lstlisting}
+  function add : int (n1 : int; n2 : int) {
+    return n1 + n2;
+  }
+  print(add(40 ; 2));
+\end{lstlisting}
+
+\lstinputlisting[firstline=57, lastline=58, caption={Regra parameters}]{../../parser.mly}
+
+\lstinputlisting[firstline=60, lastline=61, caption={Regra single\_parameter}]{../../parser.mly}
+
+Um \textit{block} é utilizado na construção do \textit{if} e \textit{for} para o agrupamos de 1 ou mais \textit{statement} dentro de chavetas.
+
+\lstinputlisting[firstline=63, lastline=66, caption={Regra block}]{../../parser.mly}
+
+Uma \textit{simple\_statement} é uma instrução que não é definida à custa de outras instruções.
+
+\lstinputlisting[firstline=68, lastline=75, caption={Regra simple\_statement}]{../../parser.mly}
+
+\lstinputlisting[firstline=77, lastline=80, caption={Regra set}]{../../parser.mly}
+\clearpage
+
+Uma expressão define uma instrução que representa um valor, tais como operações matemáticas, chamadas de funções e acesso a variáveis.
+
+\lstinputlisting[firstline=82, lastline=93, caption={Regra expression}]{../../parser.mly}
+
+Um \textit{array} é um tipo de conjunto de dados presente na linguagem Natrix definido recorrendo à seguinte regra:
+
+\lstinputlisting[firstline=95, lastline=99, caption={Regra array}]{../../parser.mly}
+
+Por fim, um \textit{type\_value} representa todas as construções de tipos.
+
+\lstinputlisting[firstline=101, lastline=109, caption={Regra type\_value}]{../../parser.mly}

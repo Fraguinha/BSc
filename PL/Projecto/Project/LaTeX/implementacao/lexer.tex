@@ -1,0 +1,29 @@
+\subsubsection{Lexer.mll}
+\label{sec2:subsubsec:lexer}
+
+O \textit{lexer} é gerado através do uso da ferramenta ocamllex~\cite{ocamllex}, neste são definidas quais as expressões regulares que serão reconhecidas pelo automato, nomeadamente:
+
+\lstinputlisting[firstline=48, lastline=57, caption={Regular expressions}]{../../lexer.mll}
+\clearpage
+
+É também definido de que forma tratar cada uma das expressões regulares referidas anteriormente atraves da regra \textit{token}:
+
+\lstinputlisting[firstline=59, lastline=101, caption={Regra token}]{../../lexer.mll}
+\clearpage
+
+De forma a obter um processamento mais eficiente no parser de \textit{identifiers}, é feito uso da função \textit{kwd\_or\_id} que implementa uma \textit{hashtable} de forma a verificar (e devolver) os \textit{tokens} correspondentes as palavras reservadas se estas forem reconhecidas, ou um \textit{token} genérico caso contrário:
+
+\lstinputlisting[firstline=10, lastline=27, caption={id\_or\_kwd}]{../../lexer.mll}
+
+Os \textit{ranges} são processados atrávez do uso da expressão regular \textit{range} e a função \textit{parse\_range} que divide a expressão regular anterior em 2 inteiros:
+
+\lstinputlisting[firstline=29, lastline=42, caption={parse\_range}]{../../lexer.mll}
+\clearpage
+
+O processamento de \textit{strings} é feito através da regra \textit{string} que constroi uma string e devolve o token correspondente do seguinte modo:
+
+\lstinputlisting[firstline=109, lastline=136, caption={Regra string}]{../../lexer.mll}
+
+O \textit{lexer} também permite o reconhecimento de comentários aninhados através da regra \textit{comment} que faz uso de uma referência (\textit{level}) para manter o nível de profundidade do comentário:
+
+\lstinputlisting[firstline=103, lastline=107, caption={Regra comment}]{../../lexer.mll}

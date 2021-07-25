@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* Transitions *)}
+  \PYG{k}{let} \PYG{o}{(}\PYG{n}{t}\PYG{o}{:(}\PYG{k+kt}{int} \PYG{o}{*} \PYG{k+kt}{char} \PYG{o}{*} \PYG{k+kt}{string} \PYG{o}{*} \PYG{k+kt}{int} \PYG{o}{*} \PYG{k+kt}{int} \PYG{o}{*} \PYG{k+kt}{int}\PYG{o}{)} \PYG{k+kt}{list}\PYG{o}{)} \PYG{o}{=}
+    \PYG{k}{let} \PYG{k}{rec} \PYG{n}{readTransitions} \PYG{n}{lst} \PYG{o}{(}\PYG{n}{k}\PYG{o}{:}\PYG{k+kt}{int}\PYG{o}{)} \PYG{o}{=}
+      \PYG{k}{if} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then}
+        \PYG{n}{lst}
+      \PYG{k}{else}
+        \PYG{k}{let} \PYG{n}{i}  \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}d\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{c}  \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}c\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{op} \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}s\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{a}  \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}c\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{a} \PYG{o}{=} \PYG{k}{if} \PYG{n}{a} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}\PYGZus{}\PYGZsq{}} \PYG{k}{then} \PYG{o}{(\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{k}{else} \PYG{o}{(}\PYG{n}{int\PYGZus{}of\PYGZus{}char} \PYG{n}{a} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{48}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{b}  \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}c\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{b} \PYG{o}{=} \PYG{k}{if} \PYG{n}{b} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}\PYGZus{}\PYGZsq{}} \PYG{k}{then} \PYG{o}{(\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{k}{else} \PYG{o}{(}\PYG{n}{int\PYGZus{}of\PYGZus{}char} \PYG{n}{b} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{48}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{j}  \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}d\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{transition}   \PYG{o}{=} \PYG{o}{(}\PYG{n}{i}\PYG{o}{,} \PYG{n}{c}\PYG{o}{,} \PYG{n}{op}\PYG{o}{,} \PYG{n}{a}\PYG{o}{,} \PYG{n}{b}\PYG{o}{,} \PYG{n}{j}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{lst} \PYG{o}{=} \PYG{n}{lst}\PYG{o}{@[}\PYG{n}{transition}\PYG{o}{]} \PYG{k}{in}
+        \PYG{n}{readTransitions} \PYG{n}{lst} \PYG{o}{(}\PYG{n}{k}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)}
+    \PYG{k}{in}
+    \PYG{n}{readTransitions} \PYG{n+nb+bp}{[]} \PYG{n}{m}
+\end{Verbatim}

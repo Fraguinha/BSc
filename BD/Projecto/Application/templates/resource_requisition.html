@@ -1,0 +1,103 @@
+{% extends '_base.html' %}
+
+{% block head %}
+<title>C4G Resource Requisition</title>
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron p-3">
+  <h2>
+    <b>Resource requisition</b>
+  </h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col md-12">
+      {% with messages = get_flashed_messages(category_filter=['success']) %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">x</span>
+        </button>
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      {% with errors = get_flashed_messages(category_filter=['error']) %}
+      {% if errors %}
+      {% for message in errors %}
+      <div class="alert alert-danger alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">x</span>
+        </button>
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>User</th>
+          <th>Resource</th>
+          <th>Quantity</th>
+          <th>Date start</th>
+          <th>Date end</th>
+          {% if session.get('admin') %}
+          <th>Actions</th>
+          {% endif %}
+        </tr>
+        {% for row in requisitions %}
+        <tr>
+          <td class="text-center">{{ row.Username }}</td>
+          {% for res in resources %}
+          {% if row.ResourceID == res.ResourceID %}
+          <td class="text-center">{{ res.Name }}</td>
+          {% endif %}
+          {% endfor %}
+          <td class="text-center">{{ row.Quantity }}</td>
+          <td class="text-center">{{ row.Date_Start }}</td>
+          <td class="text-center">{{ row.Date_End }}</td>
+          {% if session.get('admin') %}
+          <td>
+            <button class="btn btn-danger btn-xs float-right ml-2" data-toggle="modal"
+              data-target="#modalDelete-{{ row.Username }}-{{ row.ResourceID }}-{{ row.Quantity }}-{{ row.Date_Start }}-{{ row.Date_End }}">Delete</button>
+          </td>
+          {% endif %}
+        </tr>
+        <!-- Modal Delete -->
+        <form action="{{ url_for('resource_requisition') }}" method="POST">
+          <div
+            id="modalDelete-{{ row.Username }}-{{ row.ResourceID }}-{{ row.Quantity }}-{{ row.Date_Start }}-{{ row.Date_End }}"
+            class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Requisition</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" name="method" value="delete">
+                  <input type="hidden" name="id" value="{{ row.ResourceID }}">
+                  <input type="hidden" name="username" value="{{ row.Username }}">
+                  <input type="hidden" name="quantity" value="{{ row.Quantity }}">
+                  <input type="hidden" name="start" value="{{ row.Date_Start }}">
+                  <input type="hidden" name="end" value="{{ row.Date_End }}">
+                  <div class="form-group">
+                    <label>Are you sure you want to delete?</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger float-right" type="submit">Delete</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

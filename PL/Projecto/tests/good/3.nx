@@ -1,0 +1,1 @@
+let x : int = 10 % (6 / 2) in print(x - 1);

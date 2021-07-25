@@ -1,0 +1,8 @@
+5.jpg - 14 kb
+lossy image compression bitmap image
+
+5.png - 4 kb
+lossless compression bitmap image
+
+5.gif - 4 kb
+no compression lossless bitmap image

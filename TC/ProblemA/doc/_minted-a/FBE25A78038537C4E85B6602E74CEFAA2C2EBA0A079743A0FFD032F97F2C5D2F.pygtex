@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* Word *)}
+  \PYG{k}{let} \PYG{o}{(}\PYG{n}{w}\PYG{o}{:}\PYG{k+kt}{string}\PYG{o}{)} \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}s\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)}
+\end{Verbatim}

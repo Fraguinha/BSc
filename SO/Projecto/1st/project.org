@@ -1,0 +1,218 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:t todo:t |:t
+#+TITLE: Projecto Sistemas Operativos
+#+DATE: \today
+#+AUTHOR: Carolina Silva, Cristina Pinto, João Fraga
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.1 (Org mode 9.1.9)
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER:
+#+LATEX_HEADER_EXTRA:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+SUBTITLE:
+#+LATEX_COMPILER: pdflatex
+
+#+STARTUP: overview
+
+\pagebreak{}
+* Introducao
+
+  Este trabalho consiste no desenvolvimento e uma aplicacao de linha de comandos destinada a gestao de matriculas de estudantes de Erasmus, na Universidade da Beira Interior, mas que poderia ser adaptado para os restantes estudantes da mesma universidade.
+
+  A aplicacao e constituida por um conjunto de scripts e ficheiros implementados para dar resposta ao problema abordado.
+  Recorrendo a comandos de Bash Shell, a aplicacao permite a gestao e criacao de relatorios, recorrendo a bases de dados com informacoes das universidades, professores, estudantes e disciplinas.
+  Pretende ainda implementar um conjunto de funcionalidades, que contemplam Registar, Editar, Eliminar, Consultar, Listar, Relatorios ou Backups com informacoes estatisticas pertinente.
+  Trata-se de uma aplicação constituida por varios menus com o objetivo de a tornar mais pratica para qualquer utilizador.
+
+  Como suporte para o desenvolvimento deste trabalho, recorremos aos materiais fornecidos pelo docente da unidade curricular, bem com a bibliografia de referencia sugerida para esta disciplina.
+
+\pagebreak{}
+* Base de dados
+
+  A Base de Dados permite armazenar toda a informacao referente as varias entidades deste projeto, nomeadamente, a universidade, professores, estudantes e disciplinas.
+  Cada tabela da base de dados foi estruturada, tendo em conta a informacao relevante de cada entidade.
+
+** Universidades
+
+|----+---------------------------------+-----------+------------+------+------|
+| ID | Nome                            |  Contacto | Morada     | Pais | ETCS |
+|----+---------------------------------+-----------+------------+------+------|
+|  1 | Leeds University                | 999999999 | Leeds      | UK   |   30 |
+|  2 | Universite d'Orleans            | 888888888 | Orleans    | FR   |   30 |
+|  3 | Universidade Federal Rio Grande | 777777777 | Rio Grande | BR   |   30 |
+|----+---------------------------------+-----------+------------+------+------|
+
+** Professores
+
+|----+----------------+-----------+---------------------------------+--------------|
+| ID | Nome           |  Contacto | Universidade                    | Departamento |
+|----+----------------+-----------+---------------------------------+--------------|
+|  1 | William S.     | 222222222 | Leeds University                | Math         |
+|  2 | Louis Delphine | 333333333 | Universite d'Orleans            | Informatique |
+|  3 | Matheus B.     | 444444444 | Universidade Federal Rio Grande | Informatica  |
+|----+----------------+-----------+---------------------------------+--------------|
+
+** Estudantes
+
+#+ATTR_LATEX: :align llllllp{1.5cm}p{1.7cm}
+|----+---------+-----------+--------------+-------+-----------+-----------------------------+----------------------------|
+| ID | Nome    |  Contacto | Universidade | Curso | Professor | Numero \newline Disciplinas | Lista \newline Disciplinas |
+|----+---------+-----------+--------------+-------+-----------+-----------------------------+----------------------------|
+|  1 | Charles | 930000000 |            1 | E.I.  |         1 |                           5 | 1, 2, 3, 4, 5              |
+|  2 | Anne    | 930000000 |            2 | E.I.  |         2 |                           4 | 1, 3, 4, 5                 |
+|  3 | Joao    | 930000000 |            3 | E.I.  |         3 |                           3 | 1, 3, 4                    |
+|----+---------+-----------+--------------+-------+-----------+-----------------------------+----------------------------|
+
+** Disciplinas
+
+|----+------------------------+-----+----------+-------------------+----------|
+| ID | Nome                   | Ano | Semestre | Regente           | Creditos |
+|----+------------------------+-----+----------+-------------------+----------|
+|  1 | Sistemas Operativos    |   2 |        2 | Paul Crocker      |        6 |
+|  2 | Base de Dados          |   2 |        2 | Joao Muranho      |        6 |
+|  3 | Teoria da Computacao   |   2 |        2 | Simao Sousa       |        6 |
+|  4 | Engenharia de Software |   2 |        2 | Nuno Pombo        |        6 |
+|  5 | Tecnologias Multimedia |   2 |        2 | Valderi Leithardt |        6 |
+|----+------------------------+-----+----------+-------------------+----------|
+
+
+\pagebreak{}
+* Ficheiros
+
+  Todas as informacoes criadas nesta aplicacao sao armazenadas em diversos ficheiros, associados a cada entidade (universidade, professores, estudantes e disciplinas), com a extensao .csv.
+
+  No caso dos backups, estes sao armazenados em ficheiros comprimidos, com a extensao .tar.gz, que poderao ser posteriormente restaurados, a partir de uma determinada data ou ponto de restauro selecionado pelo utilizador.
+
+  Pasta backup:
+
+  - backup/user/date1.tar.gz
+  - backup/user/date2.tar.gz
+  - backup/user/date3.tar.gz
+
+  Pasta data:
+
+  - data/universidades.csv
+  - data/professores.csv
+  - data/estudantes.csv
+  - data/disciplinas.csv
+
+\pagebreak{}
+* Menus
+
+  A aplicacao desenvolvida e constituida por um conjunto de menus com o objetivo de facilitar a interação com o utilizador.
+
+\pagebreak{}
+* Programas
+
+ Para facilitar a interacao da aplicacao com o utilizador foram desenvolvidos um conjunto de programas.
+
+ Assim, foi desenvolvido um programa principal onde estao enumeradas todas as funcionalidades da aplicacao, nomeadamente, registar, editar, eliminar, consultar, listar, relatorio, backup e sair.
+
+** main.sh
+
+   Main.sh e um programa que trata de inicializar a estructura em pastas inicial e redirecionar o utilizador para os submenus apropriados tendo em conta a sua opcao.
+   Comandos utilizados:
+
+   - echo - apresentar informacao
+   - read - pedir input
+   - mkdir - criar directorias
+
+** registar.sh
+
+   registar.sh e um programa que trata da implementacao da funcionalidade de registo de novas entidades.
+   Permite ao utilizador registar uma universidade, um(a) professor(a), um estudante ou uma disciplinas.
+   Comandos utilizados:
+
+   - echo - apresentar informacao / adicionar informacao a ficheiros
+   - read - pedir input
+
+** editar.sh
+
+   editar.sh e um programa que trata da implementacao da funcionalidade de edicao de um registo.
+   Permite ao utilizador alterar a informacao de uma universidade, professor(a), estudante ou disciplina.
+   Comandos utilizados:
+
+   - echo - apresentar informacao
+   - read - pedir input
+   - awk - selecionar linha ficheiro
+   - cut - obter informacao de uma coluna
+   - sed - substituir informacao do ficheiro
+
+** eliminar.sh
+
+  Eliminar.sh e um programa que trata da implementacao da funcionalidade de eliminar um registo.
+  Permite ao utilizador eliminar uma universidade, um(a) professor/a, um estudante ou uma disciplina, atraves de uma pesquisa por “ID” ou por “nome”.
+  Comandos utilizados:
+
+  - echo - apresentar informacao
+  - read - pedir input
+  - awk - selecionar entidade
+  - cat - criar/imprimir conteudo ficheiro
+
+** consultar.sh
+
+   Consultar.sh e um programa que trate de apresentar informacoes sobre uma entidade especifica.
+   Permite ao utilizador procurar um/uma universidade, professor/a, estudante, disciplina.
+   Comandos utilizados:
+
+   - echo - apresentar informacao
+   - read - pedir input
+   - awk - selecionar entidade
+
+** listar.sh
+
+   Listar.sh e um programa que trata da apresentação de toda a informacao das varias entidades.
+   Permite apresentar uma lista de todas as universidades, professores/as, estudantes ou disciplinas registadas anteriormente.
+   Comandos utilizados:
+
+   - echo - apresentar informacao
+   - read - pedir input
+   - cat - criar/imprimir conteudo ficheiro
+
+** relatorios.sh
+
+   Relatorio.sh e um programa que trata do calculo e apresentacao de varias estatisticas.
+   Permite ao utilizador consultar qual o numero medio de disciplinas a que um aluno de Erasmus esta inscrito, qual pais de origem mais comum, quais as disciplinas com estudantes inscritos e quais destas sao as mais populares entre os estudantes.
+   Comandos utilizados:
+
+   - wc - contar linhas do ficheiro
+   - seq - obter sequencia de numeros
+   - head/tail - selecionar linha
+   - cut - obet informacao de uma coluna
+   - echo - apresentar informacao
+   - read - pedir input
+   - cat - criar/imprimir conteudo do ficheiro
+   - awk - selecionar linha do ficheiro
+   - sort - ordenar ficheiro
+   - uniq - eliminar linhas iguais adjacentes
+
+** backup.sh
+
+   Backup.sh e um programa que trata da implementacao de toda a funcionalidade de backup.
+   Permite ao utilizador criar/eliminar backups que estao armazenados na pasta backup.
+   E possivel tambem restaurar um backup atraves de uma lista de backups que é gerada com base nos backups presentes na pasta backup
+   Comandos utilizados:
+
+   - echo - apresentar informacao
+   - read - pedir input
+   - tar - comprimir backups
+   - nl - numerar backups
+   - rm - remover backups
+   - find - encontrar backups
+   - sed - selecionar linha
+
+\pagebreak{}
+* Conclusao
+
+O desenvolvimento deste projeto permitiu o aprofundamento de competencias de Sistemas Operativos, nomeadamente na utilizacao da linguagem e comandos de Bash Shell.
+
+Permitiu ainda aos elementos da equipa ter um maior conhecimento de como elaborar uma aplicacao que permita o tratamento e arquivo de informacao de forma segura.
+
+Assim, o desenvolvimento do projeto proposto na unidade curricular de Sistemas Operativos foi bastante enriquecedor, pois permitiu mobilizar os conteúdos apreendidos no decorrer das aulas teoricas e praticas.

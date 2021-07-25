@@ -1,0 +1,16 @@
+-- Número: 39222
+-- Nome: João Fraga
+-- Curso: Engenharia Informática
+-- Trabalho: TA2
+
+-- Q1: A arquitetura ANSI SPARC aplica-se a que tipo de base de dados? Porquê?
+
+Aplica-se as bases de dados com arquitecturas divididas em 3 niveis (externo, conceptual e interno) de forma a tentar exibir independencia fisica dos dados, prevenir accesso directo ao nivel conceptual e fornecer independencia logica dos dados.
+
+-- Q2: Uma transação faz evoluir a base de dados de um estado de integridade para um novo estado de integridade. Explique por palavras suas o conceito de integridade quando aplicado a base de dados.
+
+Uma transação é uma operação que deve ser completamente realizada, ou descartada caso contrario. Integridade, no contexto de base de dados, refere-se a um estado em que todos os dados da base de dados estão consistentes entre si e não apresentam erros.
+
+-- Q3: No desenvolvimento de base de dados os conceitos de independência física e independência lógica são fatores fundamentais para o sucesso dos SGBD, porquê?
+
+A independencia fisica/lógica permite um maior nivel de abstração dos dados aos programadores para que estes possam alterar os seus programas (nomeadamento a forma de uso/acesso a informação) sem que estas alterações se reflitam no armazenamento fisico dos dados.

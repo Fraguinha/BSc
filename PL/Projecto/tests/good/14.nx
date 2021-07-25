@@ -1,0 +1,4 @@
+var r : int = 10;
+
+foreach i in range(r) do
+  print(i);

@@ -1,0 +1,4 @@
+foreach i in 0..9 do
+{
+  print(i); print(i);
+}

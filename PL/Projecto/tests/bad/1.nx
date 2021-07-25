@@ -1,0 +1,2 @@
+var print : int = 10;
+print(print);

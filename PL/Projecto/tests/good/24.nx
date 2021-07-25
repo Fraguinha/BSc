@@ -1,0 +1,5 @@
+function add : int (n1 : int ; n2 : int) {
+  return n1 + n2;
+}
+
+print(add (40 ; 2));

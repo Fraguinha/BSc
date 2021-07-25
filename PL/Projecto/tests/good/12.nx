@@ -1,0 +1,4 @@
+type r = 1..10;
+
+foreach i in r do
+  print(i);

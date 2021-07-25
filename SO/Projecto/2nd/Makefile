@@ -1,0 +1,40 @@
+CC:=cc
+CLIBS:=-lm
+CFLAGS:=-Wall -std=c99
+
+SERVERFOLDER:=server
+CLIENTFOLDER:=client
+TESTFOLDER:=$(CLIENTFOLDER)/tests
+
+SERVER:=$(SERVERFOLDER)/main.exe
+CLIENT:=$(CLIENTFOLDER)/client.exe
+
+TESTCLIENT:=$(TESTFOLDER)/test.exe
+
+OBJSERVER:=$(SERVERFOLDER)/main.o $(SERVERFOLDER)/server.o
+OBJCLIENT:=$(CLIENTFOLDER)/client.o
+
+OBJTESTCLIENT:=$(TESTFOLDER)/test.o $(SERVERFOLDER)/server.o
+
+all : $(SERVER) $(CLIENT) $(TESTCLIENT)
+
+$(SERVER) : $(OBJSERVER)
+	$(CC) -o $(SERVER) $(OBJSERVER) $(CLIBS)
+
+$(CLIENT) : $(OBJCLIENT)
+	$(CC) -o $(CLIENT) $(OBJCLIENT) $(CLIBS)
+
+$(TESTCLIENT) : $(OBJTESTCLIENT)
+	$(CC) -o $(TESTCLIENT) $(OBJTESTCLIENT) $(CLIBS)
+
+$(SERVERFOLDER)/%.o : %.c %.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(CLIENTFOLDER)/%.o : %.c %.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TESTFOLDER)/%.o : %.c %.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(SERVERFOLDER)/*.exe $(SERVERFOLDER)/*.o $(CLIENTFOLDER)/*.exe $(CLIENTFOLDER)/*.o $(TESTFOLDER)/*.exe $(TESTFOLDER)/*.o

@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* This function follows all e\PYGZsq{}s possible *)}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{followAllE} \PYG{n}{state} \PYG{n}{lastState} \PYG{n}{transitions} \PYG{o}{=}
+    \PYG{k}{let} \PYG{n}{state} \PYG{o}{=} \PYG{n}{followE} \PYG{n}{state} \PYG{n+nb+bp}{[]} \PYG{n}{transitions} \PYG{k}{in}
+    \PYG{k}{if} \PYG{n}{state} \PYG{o}{\PYGZlt{}\PYGZgt{}} \PYG{n}{lastState} \PYG{k}{then}
+      \PYG{k}{let} \PYG{n}{lastState} \PYG{o}{=} \PYG{n}{state} \PYG{k}{in}
+      \PYG{n}{followAllE} \PYG{n}{state} \PYG{n}{lastState} \PYG{n}{transitions}
+    \PYG{k}{else}
+      \PYG{n}{state}
+\end{Verbatim}

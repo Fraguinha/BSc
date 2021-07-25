@@ -1,0 +1,4 @@
+
+type r = 2..4;
+
+print(size(r));

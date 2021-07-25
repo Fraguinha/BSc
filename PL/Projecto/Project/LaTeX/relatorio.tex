@@ -1,0 +1,73 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=3cm, headheight=2cm, headsep=24pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{color}
+
+\pagestyle{fancy}
+
+\definecolor{gray}{rgb}{0.502,0.502,0.502}
+\definecolor{brown}{rgb}{0.396,0.263,0.129}
+
+\lstset{
+  language=Caml,
+  title=\lstname,
+  basicstyle=\footnotesize,
+  tabsize=2,
+  columns=fixed,
+  breakatwhitespace=false,
+  breaklines=true,
+  keepspaces=true,
+  showspaces=false,
+  showtabs=false,
+  showstringspaces=false,
+  captionpos=b,
+  frame=tblr,
+  numbers=left,
+  numbersep=10pt,
+  stepnumber=1,
+  backgroundcolor=\color{white},
+  numberstyle=\tiny\color{gray},
+  rulecolor=\color{black},
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{brown},
+  commentstyle=\color{gray}\textit
+}
+
+\renewcommand{\lstlistingname}{Code sample}
+\renewcommand{\lstlistlistingname}{List of code samples}
+
+\begin{document}
+
+\begin{titlepage}
+  \input{capa/capa}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\lstlistoflistings
+\clearpage
+
+\input{introducao/introducao}
+\clearpage
+
+\input{implementacao/implementacao}
+\clearpage
+
+\input{reflexao/reflexao}
+\clearpage
+
+\input{conclusao/conclusao}
+\clearpage
+
+\bibliographystyle{plain}
+\bibliography{bibliografia/bibliografia}
+
+\end{document}

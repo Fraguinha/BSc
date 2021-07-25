@@ -1,0 +1,23 @@
+Sexta:
+  - Comunicação ✅
+  - Protocolo ✅
+
+Sabado:
+  - Fazer ficheiros ✅
+  - Fazer filas ✅
+
+Domingo:
+  - Fazer testes
+  - Relatorio
+    -Filosofia do cliente ✅
+    -completar tabela de comandos ✅
+    -explicar forks e threads ✅
+    -explicar 1ª Comunicação ✅
+    -completar server ✅
+    -explicar Protocolo de Comunicação ✅
+    -testes ✅
+    -adicionar print dos menus
+    -Mudar esquema threads cite:Chapter9
+
+-id - filas
+-idp - id mensagens

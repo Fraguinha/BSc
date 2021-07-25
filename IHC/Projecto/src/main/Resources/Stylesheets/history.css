@@ -1,0 +1,30 @@
+#toolbar {
+    -fx-background-color: #006075;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.0, 1.0, -2.0);
+}
+
+#background {
+    -fx-background-color: white;
+}
+
+#title {
+    -fx-font-size: 30;
+}
+
+#menu {
+    -fx-background-color: white;
+    -fx-border-color: #01161E;
+    -fx-border-radius: 3px;
+}
+
+#ap {
+    -fx-background-color: white;
+}
+
+.button:pressed {
+    -fx-effect: innershadow(three-pass-box, black, 10, 0.0, 2.0, 2.0);
+}
+
+.button:pressed:hover {
+    -fx-effect: innershadow(three-pass-box, black, 10, 0.0, 2.0, 2.0);
+}

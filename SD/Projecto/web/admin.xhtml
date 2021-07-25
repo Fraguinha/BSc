@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsf/core"
+      xmlns:s="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+  <ui:composition template="/default.xhtml">
+
+    <ui:define name="title">Manage</ui:define>
+
+    <ui:define name="content">
+
+      <div class="container mt-5">
+
+        <!-- View Sales -->
+        <div class="card">
+          <div class="card-header text-center">
+            Sales
+          </div>
+          <div class="card-body">
+            <h:dataTable class="table table-hover text-center" value="#{saleController.getSaleList()}" var="item" >
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="ID"/>
+                </c:facet>
+                <h:outputText value="#{item.id}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Client"/>
+                </c:facet>
+                <h:outputText value="#{item.client.username}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Value"/>
+                </c:facet>
+                <h:outputText value="#{item.value} €"/>
+              </h:column>
+            </h:dataTable>
+          </div>
+        </div>
+
+      </div>
+    </ui:define>
+
+  </ui:composition>
+</html>

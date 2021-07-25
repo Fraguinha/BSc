@@ -1,0 +1,2 @@
+foreach i in range(10) do
+  print(i);

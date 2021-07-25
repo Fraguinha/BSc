@@ -1,0 +1,25 @@
+type t = 0 .. 25 ;
+
+type arr = array t of int;
+var a : arr filled by 0;
+
+var a : array t of int filled by 0;
+
+var n1 : int = 1 ;
+var n2 : int = 0 ;
+
+a[0] := 0 ;
+a[1] := 1 ;
+foreach i in 2 .. 25 do {a[i] := a[i-1] + a[i-2];}
+
+print(a[25]);
+
+var tmp : int = 0 ;
+
+foreach i in t do
+{
+  tmp := n1;
+  n1 := n2 + n1;
+  n2 := tmp;
+}
+print(n1);

@@ -1,0 +1,33 @@
+--
+-- Número: 39222
+-- Nome: João Fraga
+-- Curso: EI
+-- Trabalho: TA6
+--
+
+-- Q1: Identifique as dependências funcionais existentes nas relações venda e produto que correspondam às condições indicadas e a apenas estas.
+
+producto:
+  Referencia -> Preço
+
+venda:
+  Empregado, Data -> Referencia, Tamanho, Cor
+  Empregado -> Loja
+  Loja -> Cidade
+  Cidade -> Loja
+
+-- Q2: Apresente as chaves candidatas e primárias para as duas relações.
+
+producto:
+  Referencia, Tamanho, Cor
+
+venda:
+  Empregado, Endereço, Data
+
+--  Q3:  Quais  são  as  formas  normais  em  que  estão  as  relações  considerando  as  opções  tomadas  nas  repostas anteriores.
+
+producto:
+  1FN (Referencia -> Preço, logo não está 2FN)
+
+venda:
+  1FN (Empregado -> Loja, logo não está 2FN)

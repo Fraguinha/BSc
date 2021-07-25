@@ -1,0 +1,6 @@
+function f : int (i : int)
+{
+  return i;
+}
+
+print(f (2));

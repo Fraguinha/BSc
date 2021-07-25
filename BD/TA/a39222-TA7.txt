@@ -1,0 +1,153 @@
+--
+-- Número: a39222
+-- Nome: João Fraga
+-- Curso: EI
+-- Trabalho: TA7
+--
+
+-- Q1: O fecho {B,C}+ não é {A, D, E, G}, justifique.
+
+Por reflexibilidade B -> B e C -> C logo O fecho {B, C}+ contem os atributos B e C
+
+-- Q2: Por que razão ABC não é uma chave candidata.
+
+Como A, B -> C,
+
+Se A, B, C -> {A, B, C, D, E, G} então A, B -> {A, B, C, D, E, G}
+Logo A, B, C não é chave candidata
+
+senão A, B, C -/> {A, B, C, D, E, G}
+Logo A, B, C não é chave candidata
+
+-- Q3: Quais são os conjuntos de atributos que são chaves candidatas, justifique.
+
+chaves candidatas:
+
+- AB
+- BC
+- BD
+- BE
+- CD
+- CE
+- CG
+
+justificação:
+
+A           {}
+A -> A      {A}
+
+B           {}
+B -> B      {B}
+
+C           {}
+C -> C      {C}
+C -> A      {C, A}
+
+D           {}
+D -> D      {D}
+D -> EG     {D, E, G}
+
+E           {}
+E -> E      {E}
+
+G           {}
+G -> G      {G}
+
+A, B        {}
+AB -> AB    {A, B}
+AB -> C     {A, B, C}
+BC -> D     {A, B, C, D}
+D -> EG     {A, B, C, D, E, G}
+
+AB é chave candidata
+
+A, C        {}
+AC -> AC    {A, C}
+
+A, D        {}
+AD -> AD    {A, D}
+
+A, E        {}
+AE -> AE    {A, E}
+
+A, G        {}
+AG -> AG    {A, G}
+
+B, C        {}
+BC -> BC    {B, C}
+BC -> D     {B, C, D}
+C -> A      {A, B, C, D}
+D -> EG     {A, B, C, D, E, G}
+
+BC é chave candidata
+
+B, D        {}
+BD -> BD    {B, D}
+D -> EG     {B, D, E, G}
+BE -> C     {B, C, D, E, G}
+C -> A      {A, B, C, D, E, G}
+
+BD é chave candidata
+
+B, E        {}
+BE -> BE    {B, E}
+BE -> C     {B, C, E}
+BC -> D     {B, C, D, E}
+C -> A      {A, B, C, D, E}
+D -> EG     {A, B, C, D, E, G}
+
+BE é chave candidata
+
+B, G        {}
+BG -> BG    {B, G}
+
+C, D        {}
+CD -> CD    {C, D}
+C -> A      {A, C, D}
+D -> EG     {A, C, D, E, G}
+ACD -> B    {A, B, C, D, E, G}
+
+CD é chave candidata
+
+C, E        {}
+CE -> CE    {C, E}
+CE -> AG    {A, C, E, G}
+CG -> BD    {A, B, C, D, E, G}
+
+CE é chave candidata
+
+C, G        {}
+CG -> CG    {C, G}
+CG -> BD    {B, C, D, G}
+C -> A      {A, B, C, D, G}
+D -> EG     {A, B, C, D, E, G}
+
+CG é chave candidata
+
+D, E        {}
+DE -> DE    {D, E}
+D -> EG     {D, E, G}
+
+D, G        {}
+DG -> DG    {D, G}
+D -> EG     {D, E, G}
+
+E, G        {}
+EG -> EG    {E, G}
+
+A, D, E     {}
+ADE -> ADE  {A, D, E}
+D -> EG     {A, D, E, G}
+
+A, D, G     {}
+ADG -> ADG  {A, D, G}
+D -> EG     {A, D, E, G}
+
+A, E, G     {}
+AEG -> AEG  {A, E, G}
+
+D, E, G     {}
+DEG -> DEG  {D, E, G}
+
+A, D, E, G    {}
+ADEG -> ADEG  {A, D, E, G}

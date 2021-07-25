@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* This function converts the variables and operation into a boolean expression *)}
+  \PYG{k}{let} \PYG{n}{operation} \PYG{n}{x} \PYG{n}{op} \PYG{n}{a} \PYG{o}{=}
+    \PYG{k}{match} \PYG{n}{op} \PYG{k}{with}
+    \PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb+bp}{true}
+    \PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}\PYGZlt{}\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{a}
+    \PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}\PYGZlt{}=\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}=} \PYG{n}{a}
+    \PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}=\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x} \PYG{o}{=} \PYG{n}{a}
+    \PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}!=\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}\PYGZgt{}} \PYG{n}{a}
+    \PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}\PYGZgt{}=\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x} \PYG{o}{\PYGZgt{}=} \PYG{n}{a}
+    \PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}\PYGZgt{}\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x} \PYG{o}{\PYGZgt{}} \PYG{n}{a}
+    \PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb+bp}{false}
+\end{Verbatim}

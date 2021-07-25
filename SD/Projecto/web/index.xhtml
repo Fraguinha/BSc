@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsf/core"
+      xmlns:s="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+  <ui:composition template="/default.xhtml">
+
+    <ui:define name="title">Homepage</ui:define>
+
+    <ui:define name="content">
+
+      <div class="container mt-5">
+
+        <div class="card">
+          <div class="card-header text-center">
+            Books
+          </div>
+          <div class="card-body">
+            <!-- Table -->
+            <h:dataTable class="w-100 h-100 table table-hover text-center" value="#{bookController.getBookList()}" var="item" >
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Name"/>
+                </c:facet>
+                <h:outputText value="#{item.name}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Author"/>
+                </c:facet>
+                <h:outputText value="#{item.author}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Publisher"/>
+                </c:facet>
+                <h:outputText value="#{item.publisher}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Language"/>
+                </c:facet>
+                <h:outputText value="#{item.language}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Genre"/>
+                </c:facet>
+                <h:outputText value="#{item.genre}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Year"/>
+                </c:facet>
+                <h:outputText value="#{item.yearPublication}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Quantity"/>
+                </c:facet>
+                <h:outputText value="#{item.quantity}"/>
+              </h:column>
+              <h:column>
+                <c:facet name="header">
+                  <h:outputText value="Price"/>
+                </c:facet>
+                <h:outputText value="#{item.price} €"/>
+              </h:column>
+              <!-- Logged in -->
+              <s:choose>
+                <s:when test="${userController.loggedIn}">
+                  <h:column>
+                    <c:facet name="header">
+                      <h:outputText value="View"/>
+                    </c:facet>
+                    <h:form>
+                      <h:link outcome="viewBook">
+                        <c:param name="id" value="#{item.id}"/>
+                        <span class="align-middle material-icons">
+                          <s:choose>
+                            <s:when test="${userController.user.type == 0}">
+                              edit
+                            </s:when>
+                            <s:otherwise>
+                              shopping_cart
+                            </s:otherwise>
+                          </s:choose>
+                        </span>
+                      </h:link>
+                    </h:form>
+                  </h:column>
+                </s:when>
+              </s:choose>
+            </h:dataTable>
+          </div>
+          <!-- Logged in -->
+          <s:choose>
+            <s:when test="${userController.loggedIn}">
+              <s:choose>
+                <s:when test="${userController.user.type == 0}">
+                  <div class="card-footer">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">
+                      Add Book
+                    </button>
+                  </div>
+                  <!-- AddModal -->
+                  <div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Add Book</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <h:form class="mx-3">
+                            <div class="mb-3 row">
+                              <label for="mName" class="col-sm-2 col-form-label">Name</label>
+                              <h:inputText id="mName" class="col form-control" value="#{bookController.newBook.name}"/>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="mAuthor" class="col-sm-2 col-form-label">Author</label>
+                              <h:inputText id="mAuthor" class="col form-control" value="#{bookController.newBook.author}"/>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="mPublisher" class="col-sm-2 col-form-label">Publisher</label>
+                              <h:inputText id="mPublisher" class="col form-control" value="#{bookController.newBook.publisher}"/>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="mGenre" class="col-sm-2 col-form-label">Genre</label>
+                              <h:inputText id="mGenre" class="col form-control" value="#{bookController.newBook.genre}"/>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="mLanguage" class="col-sm-2 col-form-label">Language</label>
+                              <h:inputText id="mLanguage" class="col form-control" value="#{bookController.newBook.language}"/>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="mYearPublication" class="col-sm-2 col-form-label">Year</label>
+                              <h:inputText id="mYearPublication" class="col form-control" value="#{bookController.newBook.yearPublication}"/>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="mQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                              <h:inputText id="mQuantity" class="col form-control" value="#{bookController.newBook.quantity}"/>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="mPrice" class="col-sm-2 col-form-label">Price</label>
+                              <h:inputText id="mPrice" class="col form-control" value="#{bookController.newBook.price}"/>
+                            </div>
+                            <div>
+                              <h:commandButton class="btn btn-success" value="Add" action="${bookController.addBook()}"/>
+                              <h:commandButton type="button" class="btn btn-secondary ms-3" value="Close" action="data-bs-dismiss">
+                                <c:ajax execute="@form" render=":staticBackdrop"/>
+                                <c:passThroughAttribute name="data-bs-dismiss" value="modal"/>
+                              </h:commandButton>
+                            </div>
+                          </h:form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </s:when>
+              </s:choose>
+            </s:when>
+          </s:choose>
+        </div>
+
+      </div>
+
+    </ui:define>
+
+  </ui:composition>
+</html>
+

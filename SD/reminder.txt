@@ -1,0 +1,21 @@
+# Compilation
+
+javac -cp "lib/*" -d bin src/*.java
+
+# Execution
+
+java -cp "bin:lib/*" [Main Class]
+
+# Creating a jar
+
+  ## Class jar
+
+  jar cvf [Jar Name].jar *.class
+
+  ## Executable jar
+
+  jar cvfe [Jar Name].jar [Main Class] *.class
+
+# Executing jar
+
+java -jar [Jar Name].jar

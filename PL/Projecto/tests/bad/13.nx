@@ -1,0 +1,6 @@
+function f : int (x : int)
+{
+  var y : int = x;
+}
+
+print(y);

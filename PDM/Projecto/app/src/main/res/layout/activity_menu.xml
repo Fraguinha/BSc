@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ubi5stars_menu"
+    android:orientation="vertical"
+    tools:context=".MenuActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_logged"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/catalinaBlue"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="15dp">
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:onClick="toProfile"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/android_person" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:maxWidth="90dp"
+                android:text="@string/user"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/menu_btn"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:onClick="logout"
+                android:padding="5dp"
+                android:text="@string/logout"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_not_loged"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/catalinaBlue"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="15dp">
+
+                <ImageView
+                    android:id="@+id/profile_picture1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:onClick="toProfile"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/android_person" />
+
+            </FrameLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/menu_btn"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:onClick="login"
+                android:padding="5dp"
+                android:text="@string/Login"
+                android:textSize="12sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/menu_btn"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:onClick="register"
+                android:padding="5dp"
+                android:text="@string/register"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/m_map"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/menu_btn"
+            android:onClick="map"
+            android:text="@string/map"
+            android:textColor="@color/goldish"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/m_trail"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/menu_btn"
+            android:onClick="trail"
+            android:text="@string/trails"
+            android:textColor="@color/goldish"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/m_ranking"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/menu_btn"
+            android:onClick="ranking"
+            android:text="Ranking"
+            android:textColor="@color/goldish"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/m_search"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/menu_btn"
+            android:onClick="search"
+            android:text="@string/search"
+            android:textColor="@color/goldish"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/m_settings"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/menu_btn"
+            android:onClick="settings"
+            android:text="@string/settings"
+            android:textColor="@color/goldish"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/ubi5stars_menu" />
+
+</LinearLayout>

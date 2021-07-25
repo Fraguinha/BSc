@@ -1,0 +1,23 @@
+--
+-- Número: 39222
+-- Nome: João Fraga
+-- Curso: EI
+-- Trabalho: TA3
+--
+-- Q1: Quais são as principais vantagens do Modelo Relacional.
+
+As vantagens do modelo relacional são:
+
+- Permitir independencia da informação. (não deixa que programas que utilizem a informação sejam afectados pela forma como esta é representada internamente)
+
+- Fornece uma maneira de lidar com a semântica, consistencia e redundancia. (Nova abstração para a referencia à informação, tecnicas como integridade referencial ajudam a manter a consistencia e a normalização ajuda a reduzir a redundância...)
+
+-- Q2: O que é a integridade referencial.
+
+Integridade referencial é a concistencia e precisão da informação em relações. Ela requer que quando uma chave estrangeira é utilizada, que essa mesma chave seja uma chave primaria válida na tabela correspondente. Isto faz com que seja impossivel: adicionar registos a uma tabela sem que a chave estrangeiras já existam como chave primarias nas tabelas correspondentes; alterar registos de forma a que chaves estrangeiras de outras tabelas fiquem inválidas; apagar registos de forma a que chaves estrangeiras de outras tabelas fiquem inválidas.
+
+-- Q3: Qual é a diferença entre super chave e chave candidata.
+
+Uma super chave é um atributo (ou conjunto de atributos) de uma tabela capaz de identificar unicamente um tuplo de uma relação.
+
+Uma chave candidata é uma uma superchave na qual nenhuma subconjunto da mesma é uma superchave.

@@ -1,0 +1,75 @@
+#pane {
+    -fx-background-color: white;
+    -fx-background-image: url(/Images/linhas.png);
+    -fx-background-repeat: repeat-x;
+    -fx-background-size: 319 152;
+}
+
+.white-key {
+    -fx-background-color: white;
+    -fx-border-color: #01161E;
+
+}
+
+#background {
+    -fx-background-color: white;
+}
+
+.white-key:pressed:hover {
+    -fx-effect: innershadow(three-pass-box, black, 40, 0.0, 2.0, 2.0);
+}
+
+.white-key:hover {
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0.0, 2.0, 2.0);
+}
+
+.black-key:hover {
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0.0, 2.0, 2.0);
+}
+
+.black-key {
+    -fx-background-color: #01161E;
+}
+
+.black-key:pressed:hover {
+    -fx-effect: innershadow(three-pass-box, black, 40, 0.0, 2.0, 2.0);
+}
+
+#delete {
+    -fx-background-color: transparent;
+}
+
+.btn {
+    -fx-background-color: white;
+    -fx-border-color: #01161E;
+    -fx-border-radius: 3px;
+}
+
+.btn:pressed {
+    -fx-effect: innershadow(three-pass-box, black, 20, 0.0, 2.0, 2.0);
+}
+
+.toggle-button {
+    -fx-background-image: url("/Images/rec.png");
+    -fx-background-size: 20;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.toggle-button:selected {
+    -fx-background-image: url("/Images/rec-red.png");
+    -fx-background-size: 20;
+    -fx-background-position: center;
+    -fx-effect: innershadow(three-pass-box, black, 20, 0.0, 2.0, 2.0);
+    -fx-background-repeat: no-repeat;
+}
+
+#toolbar {
+    -fx-background-color: #006075;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.0, 1.0, -2.0);
+}
+
+#title {
+    -fx-font-family: Optima;
+    -fx-font-size: 20;
+}

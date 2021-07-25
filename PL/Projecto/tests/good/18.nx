@@ -1,0 +1,16 @@
+type i = 10 .. 20 ;
+type i_max =10 .. 100 ;
+
+type arr = array i of i_max ;
+
+var x : int = 5 ;
+
+var y : i_max = 10 ;
+
+var tab1 : arr filled by 20 ;
+
+var tab2 : array 10 of int filled by 1 ;
+
+print(tab2[2]);
+
+print(tab1[11]);

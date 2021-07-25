@@ -1,0 +1,150 @@
+{% extends '_base.html' %}
+
+{% block head %}
+<title>C4G Institution</title>
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron p-3">
+  <h2>
+    <b>Institution</b>
+    {% if session.get('admin') %}
+    <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modalAdd">Add
+      Institution</button>
+    {% endif %}
+  </h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col md-12">
+      {% with messages = get_flashed_messages(category_filter=['success']) %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">x</span>
+        </button>
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      {% with errors = get_flashed_messages(category_filter=['error']) %}
+      {% if errors %}
+      {% for message in errors %}
+      <div class="alert alert-danger alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">x</span>
+        </button>
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          {% if session.get('admin') %}
+          <th>Actions</th>
+          {% endif %}
+        </tr>
+        {% for row in institutions %}
+        <tr>
+          <td class="text-center">{{ row.InstitutionID }}</td>
+          <td class="text-center">{{ row.Name }}</td>
+          <td class="text-center">{{ row.Email }}</td>
+          {% if session.get('admin') %}
+          <td>
+            <button class="btn btn-danger btn-xs float-right ml-2" data-toggle="modal"
+              data-target="#modalDelete{{ row.InstitutionID }}">Delete</button>
+            <button class="btn btn-warning btn-xs float-right" data-toggle="modal"
+              data-target="#modalEdit{{ row.InstitutionID }}">Edit</button>
+          </td>
+          {% endif %}
+        </tr>
+        <!-- Modal Edit -->
+        <form action="{{ url_for('institution') }}" method="POST">
+          <div id="modalEdit{{ row.InstitutionID }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Update Institution</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" name="method" value="update">
+                  <input type="hidden" name="id" value="{{ row.InstitutionID }}">
+                  <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" class="form-control" name="name" required="1">
+                  </div>
+                  <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" class="form-control" name="email" required="1">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" type="submit">Update</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Modal Delete -->
+        <form action="{{ url_for('institution') }}" method="POST">
+          <div id="modalDelete{{ row.InstitutionID }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Institution</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" name="method" value="delete">
+                  <input type="hidden" name="id" value="{{ row.InstitutionID }}">
+                  <div class="form-group">
+                    <label>Are you sure you want to delete?</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger float-right" type="submit">Delete</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% endfor %}
+      </table>
+      <!-- Modal Add -->
+      <form action="{{ url_for('institution') }}" method="POST">
+        <div id="modalAdd" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Add Institution</h4>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="method" value="add">
+                <div class="form-group">
+                  <label>Name:</label>
+                  <input type="text" class="form-control" name="name" required="1">
+                </div>
+                <div class="form-group">
+                  <label>Email:</label>
+                  <input type="email" class="form-control" name="email" required="1">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">Add Institution</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

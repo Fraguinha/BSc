@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* This function follows current state\PYGZsq{}s e\PYGZsq{}s *)}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{followE} \PYG{n}{state} \PYG{n}{newState} \PYG{n}{transitions} \PYG{o}{=}
+    \PYG{k}{match} \PYG{n}{state} \PYG{k}{with}
+    \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{newState}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n}{s}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)::}\PYG{n}{stl} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+      \PYG{k}{let} \PYG{n}{newState} \PYG{o}{=}
+        \PYG{k}{if} \PYG{n}{not} \PYG{o}{(}\PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{mem} \PYG{o}{(}\PYG{n}{s}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)} \PYG{n}{newState}\PYG{o}{)} \PYG{k}{then}
+          \PYG{n}{newState}\PYG{o}{@[(}\PYG{n}{s}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)]}
+        \PYG{k}{else}
+          \PYG{n}{newState}
+      \PYG{k}{in}
+      \PYG{k}{let} \PYG{k}{rec} \PYG{n}{followETransitions} \PYG{n}{newState} \PYG{n}{transitions} \PYG{o}{=}
+        \PYG{k}{match} \PYG{n}{transitions} \PYG{k}{with}
+        \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{newState}
+        \PYG{o}{|} \PYG{o}{(}\PYG{n}{i}\PYG{o}{,} \PYG{n}{c}\PYG{o}{,} \PYG{n}{op}\PYG{o}{,} \PYG{n}{a}\PYG{o}{,} \PYG{n}{b}\PYG{o}{,} \PYG{n}{j}\PYG{o}{)::}\PYG{n}{ttl} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+          \PYG{k}{let} \PYG{n}{newState} \PYG{o}{=}
+            \PYG{k}{if} \PYG{n}{c} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}\PYGZus{}\PYGZsq{}} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{s} \PYG{o}{=} \PYG{n}{i} \PYG{k}{then}
+              \PYG{k}{if} \PYG{n}{b} \PYG{o}{=} \PYG{o}{(\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{k}{then}
+                \PYG{k}{if} \PYG{n}{not} \PYG{o}{(}\PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{mem} \PYG{o}{(}\PYG{n}{j}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)} \PYG{n}{newState}\PYG{o}{)} \PYG{k}{then}
+                  \PYG{n}{newState}\PYG{o}{@[(}\PYG{n}{j}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)]}
+                \PYG{k}{else}
+                  \PYG{n}{newState}
+              \PYG{k}{else}
+              \PYG{k}{if} \PYG{n}{not} \PYG{o}{(}\PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{mem} \PYG{o}{(}\PYG{n}{j}\PYG{o}{,} \PYG{n}{b}\PYG{o}{)} \PYG{n}{newState}\PYG{o}{)} \PYG{k}{then}
+                \PYG{n}{newState}\PYG{o}{@[(}\PYG{n}{j}\PYG{o}{,} \PYG{n}{b}\PYG{o}{)]}
+              \PYG{k}{else}
+                \PYG{n}{newState}
+            \PYG{k}{else}
+              \PYG{n}{newState}
+          \PYG{k}{in}
+          \PYG{n}{followETransitions} \PYG{n}{newState} \PYG{n}{ttl}
+      \PYG{k}{in}
+      \PYG{k}{let} \PYG{n}{newState} \PYG{o}{=} \PYG{n}{followETransitions} \PYG{n}{newState} \PYG{n}{transitions} \PYG{k}{in}
+      \PYG{n}{followE} \PYG{n}{stl} \PYG{n}{newState} \PYG{n}{transitions}
+\end{Verbatim}

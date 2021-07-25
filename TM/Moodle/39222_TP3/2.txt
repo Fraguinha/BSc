@@ -1,0 +1,15 @@
+Free:
+
+svg - 35 kb
+jpg - 328 kb
+png - 822 kb
+
+Math:
+
+svg - 5 kb
+jpg - 305 kb
+png - 803 kb
+
+Quando se usa apenas objectos matematicos as imagens resultantes são menores em
+tamanho e como seria de esperar os ficheiros mais pequenos são os svg, seguidos
+dos jpg (que usam uma compressão lossy) e depois pelos png (compressao lossless)

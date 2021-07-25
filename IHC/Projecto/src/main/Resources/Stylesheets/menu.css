@@ -1,0 +1,32 @@
+#pane {
+    -fx-background-color: #00455f;
+}
+
+.button {
+    -fx-font-size: 25;
+    -fx-cursor: hand;
+    -fx-background-color: white;
+    -fx-end-margin: 10px;
+    -fx-text-alignment: left;
+    -fx-font-family: "Apple Braille";
+}
+
+.button:hover {
+    -fx-font-size: 30;
+}
+
+#rectangle {
+    -fx-border-radius: 40;
+}
+
+#title1 {
+    -fx-font-size: 40;
+    -fx-font-family: Optima;
+}
+
+#title2 {
+    -fx-font-size: 50;
+    -fx-font-family: "Apple Chancery";
+}
+
+

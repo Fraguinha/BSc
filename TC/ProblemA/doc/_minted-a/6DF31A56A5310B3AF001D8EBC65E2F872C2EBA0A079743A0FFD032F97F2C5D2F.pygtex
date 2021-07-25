@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* This function checks if any of the states is a final state *)}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{checkState} \PYG{n}{state} \PYG{n}{finalState} \PYG{o}{=}
+    \PYG{k}{match} \PYG{n}{state} \PYG{k}{with}
+    \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb+bp}{false}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n}{s}\PYG{o}{,} \PYG{o}{\PYGZus{})::}\PYG{n}{tl} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+      \PYG{k}{if} \PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{mem} \PYG{n}{s} \PYG{n}{finalState} \PYG{k}{then}
+        \PYG{n+nb+bp}{true}
+      \PYG{k}{else}
+        \PYG{n}{checkState} \PYG{n}{tl} \PYG{n}{finalState}
+\end{Verbatim}

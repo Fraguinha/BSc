@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    tools:context=".FilterActivity">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:backgroundTint="@color/colorAccent"
+        android:onClick="onExitClicked"
+        android:src="@drawable/ic_close_black_24dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/category"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/cb_monumentos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/monumentos"
+        android:text="@string/monuments" />
+
+    <CheckBox
+        android:id="@+id/cb_museus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/museus"
+        android:text="@string/museums" />
+
+    <CheckBox
+        android:id="@+id/cb_arte_urbana"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/arte_urbana"
+        android:text="@string/urban_art" />
+
+    <CheckBox
+        android:id="@+id/cb_zona_lazer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/zona_lazer"
+        android:text="@string/lounge_zone" />
+
+
+    <CheckBox
+        android:id="@+id/cb_zona_comercial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/zona_comercial"
+        android:text="@string/commercial_zone" />
+
+
+    <CheckBox
+        android:id="@+id/cb_zona_desportiva"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sports_zone" />
+
+
+    <CheckBox
+        android:id="@+id/cb_zona_estudantil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/zona_estudantil"
+        android:text="@string/studantry_zone" />
+
+
+    <CheckBox
+        android:id="@+id/cb_transporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/transportes"
+        android:text="@string/transport" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/menu_btn"
+        android:onClick="onFilterClicked"
+        android:text="@string/filter" />
+</LinearLayout>

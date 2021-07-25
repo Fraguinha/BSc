@@ -1,0 +1,248 @@
+{% extends '_base.html' %}
+
+{% block head %}
+<title>C4G Service</title>
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron p-3">
+  <h2>
+    <b>Service</b>
+    {% if session.get('admin') %}
+    <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modalAdd">Add
+      Service</button>
+    {% endif %}
+  </h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col md-12">
+      {% with messages = get_flashed_messages(category_filter=['success']) %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">x</span>
+        </button>
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      {% with errors = get_flashed_messages(category_filter=['error']) %}
+      {% if errors %}
+      {% for message in errors %}
+      <div class="alert alert-danger alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">x</span>
+        </button>
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Member</th>
+          <th>Dependencies</th>
+          {% if session.get('admin') %}
+          <th>Actions</th>
+          {% endif %}
+        </tr>
+        {% for row in services %}
+        <tr>
+          <td class="text-center">{{ row.ServiceID }}</td>
+          <td class="text-center">{{ row.Name }}</td>
+          <td class="text-center">{{ row.Description }}</td>
+          {% for mbr in members %}
+          {% if row.MemberID == mbr.MemberID %}
+          <td class="text-center">{{ mbr.Name }}</td>
+          {% endif %}
+          {% endfor %}
+          <td>
+            <button class="btn btn-success btn-xs float-right ml-2" data-toggle="modal"
+              data-target="#modalView{{ row.ServiceID }}">View</button>
+          </td>
+          {% if session.get('admin') %}
+          <td>
+            <button class="btn btn-danger btn-xs float-right ml-2" data-toggle="modal"
+              data-target="#modalDelete{{ row.ServiceID }}">Delete</button>
+            <button class="btn btn-warning btn-xs float-right ml-2" data-toggle="modal"
+              data-target="#modalEdit{{ row.ServiceID }}">Edit</button>
+            <button class="btn btn-success btn-xs float-right ml-2" data-toggle="modal"
+              data-target="#modalAllocate{{ row.ServiceID }}">Create Dependency</button>
+          </td>
+          {% endif %}
+        </tr>
+        <!-- Modal View -->
+        <div id="modalView{{ row.ServiceID }}" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Depencencies</h4>
+              </div>
+              <div class="modal-body">
+                <ul class="list-group">
+                  {% for alloc in dependencies %}
+                  {% if row.ServiceID == alloc.ServiceID %}
+                  <li class="list-group-item">
+                    {{ alloc.Name }}
+                    {% if session.get('admin') %}
+                    <form action="{{ url_for('service') }}" method="POST">
+                      <input type="hidden" name="method" value="deallocate">
+                      <input type="hidden" name="id" value="{{ alloc.ServiceID }}">
+                      <input type="hidden" name="allocation" value="{{ alloc.ResourceID }}">
+                      <button class="btn btn-danger float-right" type="submit">Delete</button>
+                    </form>
+                    {% endif %}
+                  </li>
+                  {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Allocate -->
+        <form action="{{ url_for('service') }}" method="POST">
+          <div id="modalAllocate{{ row.ServiceID }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Add Dependency</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" name="method" value="allocate">
+                  <input type="hidden" name="id" value="{{ row.ServiceID }}">
+                  <div class="form-group">
+                    <label>Resource:</label>
+                    <div class="input-group">
+                      <select class="custom-select" name="allocation" required>
+                        <option disabled>Select resource...</option>
+                        {% for row in resources %}
+                        <option value="{{ row.ResourceID }}">{{ row.Name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-success float-right" type="submit">Add</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Modal Edit -->
+        <form action="{{ url_for('service') }}" method="POST">
+          <div id="modalEdit{{ row.ServiceID }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Update Service</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" name="method" value="update">
+                  <input type="hidden" name="id" value="{{ row.ServiceID }}">
+                  <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" class="form-control" name="name" required="1">
+                  </div>
+                  <div class="form-group">
+                    <label>Description:</label>
+                    <input type="test" class="form-control" name="description" required="1">
+                  </div>
+                  <div class="form-group">
+                    <label>Member:</label>
+                    <div class="input-group">
+                      <select class="custom-select" name="member">
+                        <option disabled>Select member...</option>
+                        {% for row in members %}
+                        <option value="{{ row.MemberID }}">{{ row.Name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" type="submit">Update</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Modal Delete -->
+        <form action="{{ url_for('service') }}" method="POST">
+          <div id="modalDelete{{ row.ServiceID }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Service</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" name="method" value="delete">
+                  <input type="hidden" name="id" value="{{ row.ServiceID }}">
+                  <div class="form-group">
+                    <label>Are you sure you want to delete?</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger float-right" type="submit">Delete</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% endfor %}
+      </table>
+      <!-- Modal Add -->
+      <form action="{{ url_for('service') }}" method="POST">
+        <div id="modalAdd" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Add Service</h4>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="method" value="add">
+                <div class="form-group">
+                  <label>Name:</label>
+                  <input type="text" class="form-control" name="name" required="1">
+                </div>
+                <div class="form-group">
+                  <label>Description:</label>
+                  <input type="text" class="form-control" name="description" required="1">
+                </div>
+                <div class="form-group">
+                  <label>Member:</label>
+                  <div class="input-group">
+                    <select class="custom-select" name="member" required>
+                      <option disabled>Select member...</option>
+                      {% for row in members %}
+                      <option value="{{ row.MemberID }}">{{ row.Name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">Add Service</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

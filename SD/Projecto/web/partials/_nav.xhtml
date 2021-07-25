@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsf/core"
+      xmlns:s="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0c2340;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.xhtml">Bookstore</a>
+      <s:choose>
+        <s:when test="${userController.loggedIn == false}">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavAltMarkup">
+            <a class="nav-link text-light" aria-current="page" href="login.xhtml"><button type="button" class="btn btn-outline-light">Login</button></a>
+            <a class="nav-link text-light" href="register.xhtml"><button type="button" class="btn btn-outline-light">Register</button></a>
+          </div>
+        </s:when>
+        <s:otherwise>
+          <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavAltMarkup">
+            <h2 class="order-3 text-light">Welcome, ${userController.user.username}</h2>
+            <s:choose>
+              <s:when test="${userController.user.type == 0}">
+                <a class="ms-3 order-2" href="admin.xhtml"><button type="button" class="btn btn-outline-light">Manage Store</button></a>
+              </s:when>
+              <s:otherwise>
+                <a class="ms-3 order-2" href="cart.xhtml"><button type="button" class="btn btn-outline-light">Shopping Cart</button></a>
+              </s:otherwise>
+            </s:choose>
+            <h:form>
+              <h:commandButton class="btn btn-outline-light ms-3 order-1" value="Logout" action="${userController.logout()}"/>
+            </h:form>
+          </div>
+        </s:otherwise>
+      </s:choose>
+    </div>
+  </nav>
+
+</html>

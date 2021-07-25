@@ -1,0 +1,47 @@
+\begin{thebibliography}{1}
+
+\bibitem{Chapter12}
+Paul Crocker.
+\newblock Comunicação entre processos - 2ª parte (ipc - interprocess
+  communication) [chapter 12].
+\newblock {\em Universidade da Beira Interior : Sistemas Operativos},
+  2018/2019.
+
+\bibitem{Chapter11}
+Paul Crocker.
+\newblock Comunicação entre processos (ipc - interprocess communication)
+  [chapter 11].
+\newblock {\em Universidade da Beira Interior : Sistemas Operativos},
+  2018/2019.
+
+\bibitem{enunciado}
+Paul Crocker.
+\newblock Enunciado do projecto.
+\newblock {\em Universidade da Beira Interior : Sistemas Operativos},
+  2018/2019.
+
+\bibitem{Chapter10}
+Paul Crocker.
+\newblock Ficheiros e directorias [chapter 10].
+\newblock {\em Universidade da Beira Interior : Sistemas Operativos},
+  2018/2019.
+
+\bibitem{Chapter9}
+Paul Crocker.
+\newblock Programação com posix threads [chapter 9].
+\newblock {\em Universidade da Beira Interior : Sistemas Operativos},
+  2018/2019.
+
+\bibitem{Chapter13}
+Paul Crocker.
+\newblock Sincronização, deadlock, starvation, mutex locks e semaphores
+  (posix) [chapter 13].
+\newblock {\em Universidade da Beira Interior : Sistemas Operativos},
+  2018/2019.
+
+\bibitem{signal2}
+Linux.
+\newblock http://man7.org/linux/man-pages/man2/signal.2.html.
+\newblock {\em Linux Programmer's Manual}, 2017.
+
+\end{thebibliography}

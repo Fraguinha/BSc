@@ -1,0 +1,3 @@
+var x : bool = true;
+
+foreach i in range(x) do print(i);

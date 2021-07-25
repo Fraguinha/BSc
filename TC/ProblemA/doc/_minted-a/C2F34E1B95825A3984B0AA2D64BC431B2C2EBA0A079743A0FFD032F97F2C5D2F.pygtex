@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* Cardinality of F*)}
+  \PYG{k}{let} \PYG{o}{(}\PYG{n}{cardF}\PYG{o}{:}\PYG{k+kt}{int}\PYG{o}{)} \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}d\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)}
+\end{Verbatim}

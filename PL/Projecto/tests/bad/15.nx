@@ -1,0 +1,7 @@
+type index = 10..20;
+
+type i = 1..5;
+
+var a : array index of i filled by 2;
+
+print(a[1]);

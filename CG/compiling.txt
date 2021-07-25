@@ -1,0 +1,2 @@
+# Compilation command
+cc *.cpp -lstdc++ -lm -lglfw -lglew -framework OpenGL

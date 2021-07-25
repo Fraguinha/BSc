@@ -1,0 +1,50 @@
+﻿--
+-- https://dbis-uibk.github.io/relax/calc.htm
+--
+-- DBProject Database
+--
+
+group: DBProject
+description: DBProject em Algebra Relacional
+
+Departamento = {
+	DepNum:number, Nome:string, Local:string
+	1, 'Camarote', 'Camarate'
+	2, 'Informática', 'Covilhã'
+	3, 'Produção', 'Guarda'
+	4, 'Comercial', 'Lisboa'
+}
+
+Empregado = {
+	EmpNum:number, Nome:string, Categoria:string, Salario:number, DepNum:number
+	1, 'José', 'Artista', 230000,1
+	2, 'Artur', 'Programador', 250000,2
+	3, 'Carlos', 'Analista', 300000,2
+	4, 'Zezinho', 'Artes gráficas', 150000,1
+	5, 'Abílio', 'Chefe secção', 100000,3
+	6, 'António', 'Design', 100000,3
+	7, 'Daniela', 'Modelo', 80000,3
+	8, 'Margarida', 'Director', 350000,4
+	9, 'Fazenda', 'Patrão', 6000000,4
+	10, 'Marília', 'Secretária', 85000,4
+
+}
+
+Projecto = {
+	ProjNum:number, Designacao:string, Fundos:number
+	1, 'Rir à gargalhada', 60000
+    2, 'BD do IPG', 5000000
+	3, 'Sapataria da Beira', 3000000
+    4, 'Lotaria', 5060000
+}
+
+Atribuicao = {
+     EmpNum:number, ProjNum:number, Funcao:string
+     1,1, 'Animador'
+     2,2, 'Colaborador'
+     3,2, 'Coordenador'
+     3,3, 'Colaborador'
+     5,3, 'Coordenador'
+     6,3, 'Colaborador'
+     7,3, 'Colaborador'
+}

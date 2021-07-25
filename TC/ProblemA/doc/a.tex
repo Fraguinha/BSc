@@ -1,0 +1,294 @@
+% Created 2019-04-04 Thu 11:11
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{minted}
+\author{João Luís Freire Fraga}
+\date{\today}
+\title{Problema A}
+\hypersetup{
+ pdfauthor={João Luís Freire Fraga},
+ pdftitle={Problema A},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\pagebreak{}
+\section{Explicacao do problema}
+\label{sec:org5688866}
+
+O problema consiste em criar um programa que, tendo como input:
+
+\begin{itemize}
+\item Estados
+\item Estados iniciais
+\item Estados finais
+\item Transicoes possiveis
+\item Palavra
+\end{itemize}
+
+Diga se a palavra é reconhecida pelo automato.
+Ser reconhecido pelo automato implica que, comecando num dos estados iniciais, consumindo todas as letras da palavra letra a letra da esquerda para a direita e efectuando as actulizacoes necessarias, existe pelo menos um estado que pertence ao conjunto dos estados finais.
+
+\pagebreak{}
+\section{Leitura de input}
+\label{sec:org5dbaf10}
+\subsection{Numero de estados}
+\label{sec:orgb2cdc66}
+\begin{minted}[]{ocaml}
+  (* Number of states *)
+  let (n:int) = Scanf.scanf " %d" (fun x -> x)
+\end{minted}
+\subsection{Cardinalidade estados iniciais}
+\label{sec:orga1053d1}
+\begin{minted}[]{ocaml}
+  (* Cardinality of S *)
+  let (cardS:int) = Scanf.scanf " %d" (fun x -> x)
+\end{minted}
+\subsection{Estados iniciais}
+\label{sec:org168fb5a}
+Para ler os estados iniciais usei uma lista de tuples de inteiros "(int * int)" (s, x):
+\begin{itemize}
+\item s: state \{1, \ldots{}, n\}
+\item x: estado interno (inicialmente 0)
+\end{itemize}
+
+\begin{minted}[]{ocaml}
+  (* Initial states *)
+  let (is:(int * int) list) =
+    let rec readInitialState lst (i:int) =
+      if i = 0 then
+        lst
+      else
+        let state = Scanf.scanf " %d" (fun x -> x) in
+        let lst = lst@[(state, 0)] in
+        readInitialState lst (i-1)
+    in
+    readInitialState [] cardS
+\end{minted}
+\subsection{Cardinalidade estados finais}
+\label{sec:org64468e1}
+\begin{minted}[]{ocaml}
+  (* Cardinality of F*)
+  let (cardF:int) = Scanf.scanf " %d" (fun x -> x)
+\end{minted}
+\pagebreak{}
+\subsection{Estados finais}
+\label{sec:org77d65f5}
+Para ler os estados finais usei uma lista de inteiros
+\begin{minted}[]{ocaml}
+  (* Final states *)
+  let (fs:int list) =
+    let rec readFinalState lst (i:int) =
+      if i = 0 then
+        lst
+      else
+        let s = Scanf.scanf " %d" (fun x-> x) in
+        let lst = lst@[s] in
+        readFinalState lst (i-1)
+    in
+    readFinalState [] cardF
+\end{minted}
+\subsection{Numero de transicoes}
+\label{sec:orgab8118c}
+\begin{minted}[]{ocaml}
+  (* Number of transitions *)
+  let (m:int) = Scanf.scanf " %d" (fun x -> x)
+\end{minted}
+\pagebreak{}
+\subsection{Transicoes}
+\label{sec:orgd974cab}
+Para ler as transicoes usei uma lista de tuples do tipo "(int * char * string * int * int * int)" (i, c, op, a, b, j):
+\begin{itemize}
+\item i: inicio
+\item c: caracter consumido
+\item op: operaçao de comparacao
+\item a: valor a ser comparado
+\item b: valor a ser actualizado
+\item j: fim
+\end{itemize}
+
+\begin{minted}[]{ocaml}
+  (* Transitions *)
+  let (t:(int * char * string * int * int * int) list) =
+    let rec readTransitions lst (k:int) =
+      if k = 0 then
+        lst
+      else
+        let i  = Scanf.scanf " %d" (fun x -> x) in
+        let c  = Scanf.scanf " %c" (fun x -> x) in
+        let op = Scanf.scanf " %s" (fun x -> x) in
+        let a  = Scanf.scanf " %c" (fun x -> x) in
+        let a = if a = '_' then (-1) else (int_of_char a - 48) in
+        let b  = Scanf.scanf " %c" (fun x -> x) in
+        let b = if b = '_' then (-1) else (int_of_char b - 48) in
+        let j  = Scanf.scanf " %d" (fun x -> x) in
+        let transition   = (i, c, op, a, b, j) in
+        let lst = lst@[transition] in
+        readTransitions lst (k-1)
+    in
+    readTransitions [] m
+\end{minted}
+\subsection{Palavra}
+\label{sec:org1bc1ac7}
+\begin{minted}[]{ocaml}
+  (* Word *)
+  let (w:string) = Scanf.scanf " %s" (fun x -> x)
+\end{minted}
+\section{Funcoes}
+\label{sec:org392fd03}
+\subsection{checkState}
+\label{sec:org99cdc24}
+Esta funcao percorre a lista de estados actuais e verifica se algum deles se encontra na lista de estados finais.
+\begin{minted}[]{ocaml}
+  (* This function checks if any of the states is a final state *)
+  let rec checkState state finalState =
+    match state with
+    | [] -> false
+    | (s, _)::tl ->
+      if List.mem s finalState then
+        true
+      else
+        checkState tl finalState
+\end{minted}
+\subsection{operation}
+\label{sec:orge4717f0}
+Esta função converte uma string operação no valor booleano do resultado dessa operacao usando x e a
+\begin{minted}[]{ocaml}
+  (* This function converts the variables and operation into a boolean expression *)
+  let operation x op a =
+    match op with
+    | "_" -> true
+    | "<" -> x < a
+    | "<=" -> x <= a
+    | "=" -> x = a
+    | "!=" -> x <> a
+    | ">=" -> x >= a
+    | ">" -> x > a
+    | _ -> false
+\end{minted}
+\pagebreak{}
+\subsection{followE}
+\label{sec:orgf0d5f4e}
+Esta funcao adiciona todos os estados onde e possivel chegar a partir dos estados actuais usando uma transicao epsilon
+\begin{minted}[]{ocaml}
+  (* This function follows current state's e's *)
+  let rec followE state newState transitions =
+    match state with
+    | [] -> newState
+    | (s, x)::stl ->
+      let newState =
+        if not (List.mem (s, x) newState) then
+          newState@[(s, x)]
+        else
+          newState
+      in
+      let rec followETransitions newState transitions =
+        match transitions with
+        | [] -> newState
+        | (i, c, op, a, b, j)::ttl ->
+          let newState =
+            if c = '_' && s = i then
+              if b = (-1) then
+                if not (List.mem (j, x) newState) then
+                  newState@[(j, x)]
+                else
+                  newState
+              else
+              if not (List.mem (j, b) newState) then
+                newState@[(j, b)]
+              else
+                newState
+            else
+              newState
+          in
+          followETransitions newState ttl
+      in
+      let newState = followETransitions newState transitions in
+      followE stl newState transitions
+\end{minted}
+\subsection{followAllE}
+\label{sec:org3d28175}
+Esta funcao executa a funcao anterior enquanto esta produzir estados novos
+\begin{minted}[]{ocaml}
+  (* This function follows all e's possible *)
+  let rec followAllE state lastState transitions =
+    let state = followE state [] transitions in
+    if state <> lastState then
+      let lastState = state in
+      followAllE state lastState transitions
+    else
+      state
+\end{minted}
+\subsection{consumeL}
+\label{sec:orgf77dce2}
+Esta funcao segue todas as transicoes que partem dos estados actuais e consomem a letra l, quando permitido pela guarda, e actualiza os tornando todos estes estados resultantes, os estados actuais.
+\begin{minted}[]{ocaml}
+  (* This function follows the letters *)
+  let rec consumeL l state newState transitions =
+    match state with
+    | [] -> newState
+    | (s, x)::stl ->
+      let rec followLTransitions newState transitions =
+        match transitions with
+        | [] -> newState
+        | (i, c, op, a, b, j)::ttl ->
+          let newState =
+            if c = l && s = i && operation x op a then
+              if b = (-1) then
+                newState@[(j, x)]
+              else
+                newState@[(j, b)]
+            else newState
+          in
+          followLTransitions newState ttl
+      in
+      let newState = followLTransitions newState transitions in
+      consumeL l stl newState transitions
+\end{minted}
+\subsection{solution}
+\label{sec:org1ded6a5}
+Esta funcao utiliza todas as funcoes anteriores para decidir se a palavra w e reconhecida pelo automato.
+Se a palavra foi totalmente consumida e um dos estados actuais e um estado final então sim, caso contrario nao
+\begin{minted}[]{ocaml}
+  (* This function checks if the word is recognized *)
+  let rec solution w state finalState transitions =
+    if w = "" || state = [] then
+      let state = followAllE state state transitions in
+      checkState state finalState
+    else
+      let l = String.get w 0 in
+      let state = followAllE state state transitions in
+      let state = consumeL l state [] transitions in
+      let w = (String.sub w 1 ((String.length w) - 1)) in
+      solution w state finalState transitions
+\end{minted}
+\section{Execucao}
+\label{sec:org47991a5}
+Imprimir a solucao para o stdout
+\begin{minted}[]{ocaml}
+  (* Get answer *)
+  let () =
+    if solution w is fs t then
+      Printf.printf "YES\n"
+    else
+      Printf.printf "NO\n"
+\end{minted}
+\end{document}

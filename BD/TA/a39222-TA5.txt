@@ -1,0 +1,21 @@
+﻿--
+-- Número: 39222
+-- Nome: João Fraga
+-- Curso: EI
+-- Trabalho: TA5
+--
+-- Q1: Indique quais são os números dos departamentos que não têm empregados.
+
+π DepNum
+(Departamento) - π DepNum
+(Empregado)
+
+-- Q2: Mostre toda a informação que existe na base de dados sobre cada um dos empregados que participa em projetos.
+
+Empregado ⋉ Atribuicao
+
+-- Q3: Apresente para todos os empregados que não são modelos e que recebem um salário inferior a 100000, o seu nome e o nome do departamento a que pertencem.
+
+π Empregado.Nome, Departamento.Nome
+(σ Categoria ≠ 'Modelo' ∧ Salario < 100000
+(Empregado) ⨝ Empregado.DepNum = Departamento.DepNum Departamento)

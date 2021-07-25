@@ -1,0 +1,34 @@
+\subsubsection{Interpret.ml}
+\label{sec2:subsubsec:interpret}
+
+O ficheiro interpret.ml é o responsável por interpretar a árvore de síntaxe abstracta e executar código equivalente na linguagem OCaml.
+
+\vspace{0.5cm}
+
+\textbf{Núcleo implementado}
+
+\vspace{0.2cm}
+
+Foi implementado um interpretador capaz de lidar com todas as funcionalidades definidas na gramática estabelecida~(\ref{sec2:subsec:choices})
+
+\vspace{0.5cm}
+
+\textbf{Detalhes de implementação}
+
+O armazenamento de varíaveis foi feito através de uma \textit{hashtable} do tipo (identifier, (value * typ)) que atribui a um identificador o seu valor e tipo.
+
+O armazenamento de varíaveis de tipo foi feito através de um \textit{hashtable} do tipo (identifier, typ) que atribui a um identificador o tipo respectivo.
+
+A declaração de funções foi feita, uma vez mais, através do uso de uma \textit{hashtable} do tipo (identifier, (typ * (identifier * typ) list * statement)) que atribui a um identificador o tipo de retorno da função, uma lista de parametros e os respectivos tipos e o código que esta contém.
+
+Foram implementadas três funções principais para intrepretação do programa:
+
+\begin{enumerate}
+  \item \textbf{file} Itera sobre os \textit{statements} do programa
+  \item \textbf{stmt} Recebe um \textit{statement} e realiza a sua execução
+  \item \textbf{expr} Recebe uma expressão e retorna o seu valor
+\end{enumerate}
+
+Para toda esta implementação foi necessário a definição do tipo value que define os valores aceites pela linguagem Natrix.
+
+\lstinputlisting[firstline=7, lastline=14, caption={Value}]{../../interpret.ml}

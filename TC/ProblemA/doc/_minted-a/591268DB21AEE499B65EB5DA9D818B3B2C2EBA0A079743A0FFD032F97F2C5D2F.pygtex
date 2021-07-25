@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* This function checks if the word is recognized *)}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{solution} \PYG{n}{w} \PYG{n}{state} \PYG{n}{finalState} \PYG{n}{transitions} \PYG{o}{=}
+    \PYG{k}{if} \PYG{n}{w} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}} \PYG{o}{||} \PYG{n}{state} \PYG{o}{=} \PYG{n+nb+bp}{[]} \PYG{k}{then}
+      \PYG{k}{let} \PYG{n}{state} \PYG{o}{=} \PYG{n}{followAllE} \PYG{n}{state} \PYG{n}{state} \PYG{n}{transitions} \PYG{k}{in}
+      \PYG{n}{checkState} \PYG{n}{state} \PYG{n}{finalState}
+    \PYG{k}{else}
+      \PYG{k}{let} \PYG{n}{l} \PYG{o}{=} \PYG{n+nn}{String}\PYG{p}{.}\PYG{n}{get} \PYG{n}{w} \PYG{l+m+mi}{0} \PYG{k}{in}
+      \PYG{k}{let} \PYG{n}{state} \PYG{o}{=} \PYG{n}{followAllE} \PYG{n}{state} \PYG{n}{state} \PYG{n}{transitions} \PYG{k}{in}
+      \PYG{k}{let} \PYG{n}{state} \PYG{o}{=} \PYG{n}{consumeL} \PYG{n}{l} \PYG{n}{state} \PYG{n+nb+bp}{[]} \PYG{n}{transitions} \PYG{k}{in}
+      \PYG{k}{let} \PYG{n}{w} \PYG{o}{=} \PYG{o}{(}\PYG{n+nn}{String}\PYG{p}{.}\PYG{n}{sub} \PYG{n}{w} \PYG{l+m+mi}{1} \PYG{o}{((}\PYG{n+nn}{String}\PYG{p}{.}\PYG{n}{length} \PYG{n}{w}\PYG{o}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{))} \PYG{k}{in}
+      \PYG{n}{solution} \PYG{n}{w} \PYG{n}{state} \PYG{n}{finalState} \PYG{n}{transitions}
+\end{Verbatim}

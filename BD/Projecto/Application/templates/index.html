@@ -1,0 +1,157 @@
+{% extends '_base.html' %}
+
+{% block head %}
+<title>C4G Application</title>
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron p-3">
+  <div class="well text-center">
+    <h1 class="display-4">C4G Application</h1>
+  </div>
+</div>
+<div class="container">
+  {% with messages = get_flashed_messages(category_filter=['success']) %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+      <span aria-hidden="true">x</span>
+    </button>
+    {{message}}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  {% with errors = get_flashed_messages(category_filter=['error']) %}
+  {% if errors %}
+  {% for message in errors %}
+  <div class="alert alert-danger alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+      <span aria-hidden="true">x</span>
+    </button>
+    {{message}}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card">
+        <h5 class="card-header">Request a service</h5>
+        <div class="card-body">
+          <h5 class="card-title">C4G and their partners supply a wide variety of services</h5>
+          <p class="card-text">Check the database for an extensive list of services provided</p>
+          {% if session.get('username') %}
+          <button class="btn btn-primary btn-xs float-right ml-2" data-toggle="modal" data-target="#modalService">Make a
+            request</button>
+          {% else %}
+          <button class="btn btn-primary disabled btn-xs float-right ml-2" data-toggle="tooltip" data-placement="bottom"
+            title="Login to make a request">Make a
+            request</button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <h5 class="card-header">Request a resource</h5>
+        <div class="card-body">
+          <h5 class="card-title">Need specialized geoscience equipment?</h5>
+          <p class="card-text">C4G aims to facilitate the sharing of scientific resources</p>
+          {% if session.get('username') %}
+          <button class="btn btn-primary btn-xs float-right ml-2" data-toggle="modal" data-target="#modalResource">Make
+            a request</button>
+          {% else %}
+          <button class="btn btn-primary disabled btn-xs float-right ml-2" data-toggle="tooltip" data-placement="bottom"
+            title="Login to make a request">Make a
+            request</button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Service -->
+<form action="{{ url_for('index') }}" method="POST">
+  <div id="modalService" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Request Service</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="method" value="service">
+          <div class="form-group">
+            <label>Start:</label>
+            <div class="input-group">
+              <input type="date" name="start" id="start" required="1">
+            </div>
+            <label class="mt-2">End:</label>
+            <div class="input-group">
+              <input type="date" name="end" id="end" required="1">
+            </div>
+            <label class="mt-2">Service:</label>
+            <div class="input-group">
+              <select class="custom-select" name="service">
+                <option disabled>Select service...</option>
+                {% for row in services %}
+                <option value="{{ row.ServiceID }}">{{ row.Name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- Modal Resource -->
+<form action="{{ url_for('index') }}" method="POST">
+  <div id="modalResource" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Request Resource</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="method" value="resource">
+          <div class="form-group">
+            <label>Start:</label>
+            <div class="input-group">
+              <input type="date" name="start" id="start" required="1">
+            </div>
+            <label class="mt-2">End:</label>
+            <div class="input-group">
+              <input type="date" name="end" id="end" required="1">
+            </div>
+            <label class="mt-2">Resource:</label>
+            <div class="input-group">
+              <select class="custom-select" name="resource">
+                <option disabled>Select resource...</option>
+                {% for row in resources %}
+                <option value="{{ row.ResourceID }}">{{ row.Name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <label class="mt-2">Quantity:</label>
+            <div class="input-group">
+              <input type="number" name="quantity" id="quantity" required="1">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

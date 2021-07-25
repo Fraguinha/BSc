@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{c}{(* Final states *)}
+  \PYG{k}{let} \PYG{o}{(}\PYG{n}{fs}\PYG{o}{:}\PYG{k+kt}{int} \PYG{k+kt}{list}\PYG{o}{)} \PYG{o}{=}
+    \PYG{k}{let} \PYG{k}{rec} \PYG{n}{readFinalState} \PYG{n}{lst} \PYG{o}{(}\PYG{n}{i}\PYG{o}{:}\PYG{k+kt}{int}\PYG{o}{)} \PYG{o}{=}
+      \PYG{k}{if} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then}
+        \PYG{n}{lst}
+      \PYG{k}{else}
+        \PYG{k}{let} \PYG{n}{s} \PYG{o}{=} \PYG{n+nn}{Scanf}\PYG{p}{.}\PYG{n}{scanf} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}d\PYGZdq{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{x}\PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}\PYG{o}{)} \PYG{k}{in}
+        \PYG{k}{let} \PYG{n}{lst} \PYG{o}{=} \PYG{n}{lst}\PYG{o}{@[}\PYG{n}{s}\PYG{o}{]} \PYG{k}{in}
+        \PYG{n}{readFinalState} \PYG{n}{lst} \PYG{o}{(}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)}
+    \PYG{k}{in}
+    \PYG{n}{readFinalState} \PYG{n+nb+bp}{[]} \PYG{n}{cardF}
+\end{Verbatim}
